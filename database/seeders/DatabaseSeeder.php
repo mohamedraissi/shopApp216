@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        //$this->call(AdminsTableSeeder::class);
+        //$this->call(AdminsTableSeeder::class);//pwd:1234567
         //$this->call(SectionsTableSeeder::class);
         //$this->call(CategoryTableSeeder::class);
         
