@@ -2,6 +2,14 @@
 @section('content')
 <div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">
+		@if(Session::has('success_message'))
+			<div class="alert alert-success" role="alert">
+             {{ Session::get('success_message')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+             </div>
+        @endif
 			<div class="min-height-200px">
 				<div class="page-header">
 					<div class="row">
@@ -13,15 +21,13 @@
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="index.html">Home</a></li>
 									<li class="breadcrumb-item active" aria-current="page">Categories</li>
-									<a href="{{url('admin/add-edit-category')}}" style="max-width: 150px; float:right; display: inline-block;" class="btn btn-block btn-success"> Add Category</a>
+									
 								</ol>
 							</nav>
 						</div>
 						<div class="col-md-6 col-sm-12 text-right">
 							<div class="dropdown">
-								<a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-									January 2018
-								</a>
+							<a href="{{url('admin/add-edit-category')}}" style="max-width: 150px; float:right; display: inline-block;" class="btn btn-block btn-success"> Add Category</a>
 								<div class="dropdown-menu dropdown-menu-right">
 									<a class="dropdown-item" href="#">Export List</a>
 									<a class="dropdown-item" href="#">Policies</a>

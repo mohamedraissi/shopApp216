@@ -93,7 +93,7 @@ class AdminController extends Controller
             ];
             $customMessages =[
                 'admin_name.required' =>'Name is required',
-                'admin_name.alpha' =>' Valid Name is required',
+                'admin_name.regex' =>' Valid Name is required',
                 'admin_phone.required'=>'phone is required',
                 'admin_phone.numeric'=>' Valid phone is required',
                 'admin_image.image' =>'Valid image is required',
@@ -101,7 +101,7 @@ class AdminController extends Controller
             ];
             $this->validate($request,$rules,$customMessages);
 
-            //upload image
+             //upload image
             if($request->hasFile('admin_image')){
                 $image_tmp = $request->file('admin_image');
                 if($image_tmp->isValid()){

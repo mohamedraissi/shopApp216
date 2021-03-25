@@ -2,6 +2,16 @@
 @section('content')
 
 <div class="main-container">
+@if ($errors->any())
+    <div class="alert alert-danger" style="margin-top:10px;">
+        <ul>
+            @foreach ($errors->all() as $error)
+             <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+ @endif
+	<form name="categoryForm", id="CategoryForm" action="{{url('admin/add-edit-category')}}" method="post" enctype="multipart/form-data">@csrf
 		<div class="pd-ltr-20 xs-pd-20-10">
 			<div class="min-height-200px">
 				<div class="page-header">
@@ -19,9 +29,6 @@
 						</div>
 						<div class="col-md-6 col-sm-12 text-right">
 							<div class="dropdown">
-								<a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-									January 2018
-								</a>
 								<div class="dropdown-menu dropdown-menu-right">
 									<a class="dropdown-item" href="#">Export List</a>
 									<a class="dropdown-item" href="#">Policies</a>
@@ -31,7 +38,6 @@
 						</div>
 					</div>
 				</div>
-				<!-- Default Basic Forms Start -->
 				<div class="pd-20 card-box mb-30">
 					<div class="clearfix">
 						<div class="pull-left">
@@ -41,96 +47,94 @@
 						
 					</div>
 					<form>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Text</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control" type="text" placeholder="Johnny Brown">
+						<div class="row">
+
+						<div class="form-group col-md-6 col-sm-12">
+							<label class="col-sm-12  col-form-label">Category Name</label>
+							<div class="col-sm-12 col-md-12">
+								<input  type="text" class="form-control" name="category_name" id="category_name" placeholder="Enter Category Name">
 							</div>
 						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Search</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control" placeholder="Search Here" type="search">
+ 
+						<div id="appendCategoriesLevel" class="col-md-6 col-sm-12">
+						@include('admin.categories.append_categories_level')
+						</div>
+						
+						<div class="form-group col-md-6 col-sm-12">
+							<label class="col-sm-12  col-form-label">Select Section</label>
+							<div class="col-sm-12 col-md-12">
+							<select name="section_id" id="section_id" class="custom-select2 form-control select2-hidden-accessible" style ="width:100%;">
+								
+								@foreach($getSections as $section)
+								<option value="{{$section->id}}">{{ $section->name }}</option> 
+								@endforeach
+							</select>	
+							</div>
+						</div>  
+						
+
+
+						<div class="form-group col-md-6 col-sm-12">
+							<label for="exampleInputFile" class="col-sm-12  col-form-label">Category Image</label>
+							<div class="col-sm-12 col-md-12">
+								<div class="custom-file ">
+									<input type="file" class="custom-file-input form-control" id="category_image" name="category_image">
+									<label class="custom-file-label col-sm-12  col-form-label">Choose file</label>
+								</div>
+							</div>
+							
+						</div>
+
+						<div class="form-group col-md-6 col-sm-12">
+							<label class="col-sm-12  col-form-label">Category Discount</label>
+							<div class="col-sm-12 col-md-12">
+								<input  type="text" class="form-control"  id="category_discount" name="category_discount" placeholder="Enter Category Name">
 							</div>
 						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Email</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control" value="bootstrap@example.com" type="email">
+
+						<div class="form-group col-md-6 col-sm-12">
+							<label class="col-sm-12  col-form-label">Category Description</label>
+							<div class="col-sm-12 col-md-12">
+								<textarea name="description" id="description" type="text" class="form-control"  placeholder="Enter ..."></textarea >
 							</div>
 						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">URL</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control" value="https://getbootstrap.com" type="url">
+						
+						<div class="form-group col-md-6 col-sm-12">
+							<label class="col-sm-12  col-form-label">Category URL</label>
+							<div class="col-sm-12 col-md-12">
+								<input  type="text" class="form-control"  id="url" name="url" placeholder="Enter Category Name">
+							</div>
+						</div>	
+
+
+						<div class="form-group col-md-6 col-sm-12">
+							<label class="col-sm-12  col-form-label">Meta Title</label>
+							<div class="col-sm-12 col-md-12">
+							<textarea  id="meta_title" name="meta_title" type="text" class="form-control"  placeholder="Enter..."></textarea>
 							</div>
 						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Telephone</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control" value="1-(111)-111-1111" type="tel">
+
+						<div class="form-group col-md-6 col-sm-12">
+							<label class="col-sm-12  col-form-label">Meta Description</label>
+							<div class="col-sm-12 col-md-12">
+							<textarea id="meta_description" name="meta_description" type="text" class="form-control"  placeholder="Enter..."></textarea>
 							</div>
 						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Password</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control" value="password" type="password">
+
+						<div class="form-group col-md-6 col-sm-12">
+							<label class="col-sm-12  col-form-label">Meta Keywords </label>
+							<div class="col-sm-12 col-md-12">
+								<textarea  id="meta_keywords" name="meta_keywords" type="text" class="form-control"  placeholder="Enter..."></textarea>
 							</div>
 						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Number</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control" value="100" type="number">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="example-datetime-local-input" class="col-sm-12 col-md-2 col-form-label">Date and time</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control datetimepicker" placeholder="Choose Date anf time" type="text">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Date</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control date-picker" placeholder="Select Date" type="text">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Month</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control month-picker" placeholder="Select Month" type="text">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Time</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control time-picker td-input" placeholder="Select time" type="text" readonly="">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Select</label>
-							<div class="col-sm-12 col-md-10">
-								<select class="custom-select col-12">
-									<option selected="">Choose...</option>
-									<option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Color</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control" value="#563d7c" type="color">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Input Range</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control" value="50" type="range">
-							</div>
-						</div>
-					</form>
+
+					<div class ="card-footer">
+					<button type ="submit" class="btn btn-primary"> submit </button>
+					</div>
+						
+						
+				    </div>
+				     </form>
 					<div class="collapse collapse-box" id="basic-form1">
 						<div class="code-box">
 							<div class="clearfix">

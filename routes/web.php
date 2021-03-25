@@ -1,9 +1,11 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Client\ClientController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,8 +53,15 @@ Route::prefix('/admin')->namespace('Admin')->group(function(){
   Route::get ('categories',[CategoryController::class,'categories']);
   Route::post('update-category-status', [CategoryController::class,'updateCategoryStatus'] );
   Route::match(['get','post'], 'add-edit-category/{id?}',[CategoryController::class,'addEditCategory']);
+  Route::post('append-categories-level',[CategoryController::class,'appendCategoryLevel']);
   
   });
-  
-
 });
+
+Route::get('index', [ClientController::class,'index']);
+Route::get('shop', [ClientController::class,'shop']);
+Route::get('blog', [ClientController::class,'blog']);
+Route::get('contact', [ClientController::class,'contact']);
+Route::get('blog-details', [ClientController::class,'blogd']);
+Route::get('checkout', [ClientController::class,'check']);
+Route::get('shopping-cart', [ClientController::class,'shopcart']);
