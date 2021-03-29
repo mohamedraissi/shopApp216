@@ -13,9 +13,9 @@ class CategoryController extends Controller
 {
 public function categories(){
     Session::put('page',"categories");
-    $categories = Category::get();
+    $categories = Category::with(['section','parentcategory'])->get();
     /*$categories =json_decode(json_encode($categories));
-      ech"<pre>"; print_r($categories); die;*/
+      echo"<pre>"; print_r($categories); die;*/
       return view('admin.categories.categories')->with(compact('categories'));
 }
 public function updateCategoryStatus (Request $request){
@@ -34,16 +34,27 @@ public function updateCategoryStatus (Request $request){
  }
  public function addEditCategory (Request $request,$id=null){
    if ($id==""){
+    //Add category Functionality
      $title="Add Category";
-     //Add category Functionality
      $category = new Category;
+     $categorydata = array();
+     $getCategories=array();
+     $message ="category updated successfully!";
+
    }else {
+    //Edit Category Functionlity
      $title="Edit Category";
-     //Edit Category Functionlity
+     $categorydata=Category::where('id',$id)->first();
+     $categorydata=json_decode(json_encode($categorydata),true);
+     $getCategories=Category::with('subcategories')-> where(['parent_id'=>0,'section_id'=>$categorydata['section_id']])->get();
+     $getCategories = json_decode(json_encode($getCategories),true);
+     $category = Category::find($id);
+     $message ="category updated successfully!";
+
    }
 
-   if ($request->isMethod('post')){ 
-      $data=$request->all();
+   if ($request->isMethod('post')){
+     $data=$request->all();
      /*echo"<pre>";  print_r($data);die;*/
 
      //Category Validation 
@@ -96,7 +107,7 @@ if(empty($data['meta_description'])){
 if(empty($data['meta_keywords'])){
   $data['meta_keywords']="";
 }
-
+ /*echo "<pre>"; print_r($data);die;*/ 
 
      $category->parent_id=$data['parent_id'];
      $category->section_id=$data['section_id'];
@@ -111,23 +122,48 @@ if(empty($data['meta_keywords'])){
      $category->status=1 ;
      $category->save();
 
-     session::flash('success_message','category added successfully!');
+     session::flash('success_message', $message);
       return redirect('admin/categories');
 
    }
 
    //Get All Section
    $getSections=Section::get();
-   return view('admin.categories.add_edit_category')->with(compact(['title','getSections']));
- }
+   return view('admin.categories.add_edit_category')->with(compact(['title','getSections','categorydata','getCategories']));
+  }
  public function appendCategoryLevel(Request $request){
   if ($request->ajax()){
     $data = $request->all();
     /*echo"<pre>";print_r($data); die;*/
-    $getCategories = Category::with('subcategories')->where(['section_id'=>$data['section_id'], 'parent_id'=>0 ,'status'=>1])-> get();
+    $getCategories = Category::with('subcategories')->where(['section_id'=>$data['section_id'], 'parent_id'=>0 ,'status'=>1])->get();
     $getCategories= json_decode(json_encode($getCategories),true);
     /*echo"<pre>";print_r($getCategories); die;*/
-    return  $getCategories; 
+    return view('admin.categories.append_categories_level')->with(compact('getCategories')); 
   }
+}
+public function deleteCategoryImage($id){
+  //Get Category Image 
+  $categoryImage = Category::select ('category_image')->where ('id',$id)-> first();
+  //Get Category Image Path
+  $category_image_path ='image/category_images/';
+  //Delete Category Image  from category_images folder if exists
+  if (file_exists($category_image_path.$categoryImage->category_image)){
+    unlink($category_image_path.$categoryImage->category_image);
+  }
+  //Delete Category Image from categories tale
+  Category::where('id',$id)->update(['category_image'=>'']);
+
+  $message ='Category image has been deleted successfully!';
+  session::flash('success_message', $message);
+  return redirect()->back();
+}
+public function deleteCategory($category,$id){
+  //Delete Category 
+  dd($id);
+  Category::where('id',$id)->delete();
+  $message = 'Category '.$category.' has been deleted successfully!';
+  session::flash('success_message', $message);
+      return redirect()->back();
+
 }
 }
