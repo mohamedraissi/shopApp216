@@ -14,9 +14,11 @@ use DB;
 class AdminController extends Controller
 {
     public function dashboard(){
+        Session::put('page',"dashboard");
         return view('layouts.admin_layout.admin_dashboard');
     }
     public function settings(){
+        Session::put('page',"settings");
         $adminDetails = Admin::where('email',Auth::guard('admin')->user()->email)->first();
         return view('layouts.admin_layout.admin_settings')->with(compact('adminDetails'));
     }
@@ -82,6 +84,7 @@ class AdminController extends Controller
         }
     }
     public function updateAdminDetails (Request $request){
+        Session::put('page',"updateAdminDetails");
         if($request->isMethod('post')){
             $data = $request->all();
             //echo "<pre>"; print_r($data); die;
@@ -133,6 +136,7 @@ class AdminController extends Controller
         return view('layouts.admin_layout.update_admin_details');
     }
     public function addSubAdmin(Request $request){
+        Session::put('page',"addSubAdmin");
         if($request->isMethod('post')){
             $data = $request->all();
             //echo "<pre>"; print_r($data); die;

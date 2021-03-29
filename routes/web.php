@@ -5,7 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\CategoryController;
+
+use App\Http\Controllers\Admin\ProductsController;
+
 use App\Http\Controllers\Client\ClientController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,6 +58,9 @@ Route::prefix('/admin')->namespace('Admin')->group(function(){
   Route::post('update-category-status', [CategoryController::class,'updateCategoryStatus'] );
   Route::match(['get','post'], 'add-edit-category/{id?}',[CategoryController::class,'addEditCategory']);
   Route::post('append-categories-level',[CategoryController::class,'appendCategoryLevel']);
+  //product
+  Route::get('products', [ProductsController::class,'products']);
+
   
   });
 });
