@@ -40,7 +40,7 @@ Route::prefix('/admin')->namespace('Admin')->group(function(){
   Route::match(['get','post'],'/', [AdminController::class,'login']);
   Route::group(['middleware'=>['admin']],function(){
   Route::get('dashboard', [AdminController::class,'dashboard']);
-  Route::get('settings', [AdminController::class,'settings']);
+  Route::get('settings', [AdminController::class,'settings']); 
   Route::get('logout', [AdminController::class,'logout']); 
   Route::post('check-current-pwd', [AdminController::class,'checkCurrentPassword']);
   Route::post('update-current-pwd', [AdminController::class,'updateCurrentPassword']); 

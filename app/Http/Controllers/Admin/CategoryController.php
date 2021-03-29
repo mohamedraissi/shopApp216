@@ -42,7 +42,7 @@ public function updateCategoryStatus (Request $request){
      //Edit Category Functionlity
    }
 
-   if ($request->isMethod('post')){
+   if ($request->isMethod('post')){ 
      $data=$request->all();
      /*echo"<pre>";  print_r($data);die;*/
 
