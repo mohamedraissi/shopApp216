@@ -42,8 +42,8 @@ public function updateCategoryStatus (Request $request){
      //Edit Category Functionlity
    }
 
-   if ($request->isMethod('post')){
-     $data=$request->all();
+   if ($request->isMethod('post')){ 
+      $data=$request->all();
      /*echo"<pre>";  print_r($data);die;*/
 
      //Category Validation 

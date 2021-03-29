@@ -82,7 +82,7 @@
 									<label class="custom-file-label col-sm-12  col-form-label">Choose file</label>
 								</div>
 							</div>
-							
+							   
 						</div>
 
 						<div class="form-group col-md-6 col-sm-12">
