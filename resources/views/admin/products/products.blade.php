@@ -60,9 +60,9 @@
 
 									<td>
 									@if($product->status==1)
-										<a class="updateproductStatus"  id="product-{{$product->id }}" product_id="{{$product->id }}" href ="javascript::void(0)"> Active </a>
+										<a href ="javascript:void(0);" class="updateProductStatus"  id="product-{{$product->id }}" product_id="{{$product->id }}" > Active </a>
 									@else 
-									<a class="updateproductStatus"  id="product-{{$seProductsction->id }}" product_id="{{$product->id }}" href ="javascript::void(0)"> Inactive </a>
+									<a href ="javascript:void(0);" class="updateProductStatus"  id="product-{{$product->id }}" product_id="{{$product->id }}" > Inactive </a>
 									@endif
 									</td>
 

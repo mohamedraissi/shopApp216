@@ -62,7 +62,7 @@
 									@if($category->status==1)
 										<a class="updateCategoryStatus"  id="category-{{$category->id }}" category_id="{{$category->id }}" href ="javascript::void(0)"> Active </a>
 									@else 
-									<a class="updateCategoryStatus"  id="category-{{$secategoriesction->id }}" category_id="{{$category->id }}" href ="javascript::void(0)"> Inactive </a>
+									<a class="updateCategoryStatus"  id="category-{{$category->id }}" category_id="{{$category->id }}" href ="javascript::void(0)"> Inactive </a>
 									@endif
 									</td>
 

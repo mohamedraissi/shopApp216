@@ -59,6 +59,8 @@ Route::prefix('/admin')->namespace('Admin')->group(function(){
   Route::match(['get','post'], 'add-edit-category/{id?}',[CategoryController::class,'addEditCategory']);
   //product
   Route::get('products', [ProductsController::class,'products']);
+  Route::post('update-product-status', [ProductsController::class,'updateProductStatus'] );
+  Route::get('delete-product/{id}', [ProductsController::class,'deleteProduct'] );
   
   });
 });

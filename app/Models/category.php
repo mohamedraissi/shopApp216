@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class category extends Model
 {
-    use HasFactory;
+    public function subcategories(){
+        return $this->hasMany('App\Models\Category','parent_id')->where('status',1);
+            }
 }
