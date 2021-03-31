@@ -5,11 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\CategoryController;
-
-use App\Http\Controllers\Admin\ProductsController;
-
 use App\Http\Controllers\Client\ClientController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,7 +36,7 @@ Route::prefix('/admin')->namespace('Admin')->group(function(){
   Route::match(['get','post'],'/', [AdminController::class,'login']);
   Route::group(['middleware'=>['admin']],function(){
   Route::get('dashboard', [AdminController::class,'dashboard']);
-  Route::get('settings', [AdminController::class,'settings']);  
+  Route::get('settings', [AdminController::class,'settings']);
   Route::get('logout', [AdminController::class,'logout']); 
   Route::post('check-current-pwd', [AdminController::class,'checkCurrentPassword']);
   Route::post('update-current-pwd', [AdminController::class,'updateCurrentPassword']); 
@@ -58,8 +54,8 @@ Route::prefix('/admin')->namespace('Admin')->group(function(){
   Route::post('update-category-status', [CategoryController::class,'updateCategoryStatus'] );
   Route::match(['get','post'], 'add-edit-category/{id?}',[CategoryController::class,'addEditCategory']);
   Route::post('append-categories-level',[CategoryController::class,'appendCategoryLevel']);
-  //product
-  Route::get('products', [ProductsController::class,'products']);
+  Route::get('delete-category-image/{id}' , [CategoryController::class, 'deleteCategoryImage']);
+  Route::get('delete-{category}/{id}' , [CategoryController::class, 'deleteCategory']);
 
   
   });

@@ -49,7 +49,9 @@
 								<tr>
 									
 									<th>ID</th>
-									<th>Name</th>
+									<th>Section</th>
+									<th>Category</th>
+									<th>Parent Category</th>
                                     <th>URL</th>
 									<th>Status</th>
 									<th>action</th>
@@ -58,19 +60,28 @@
 							    </thead>
 							    <tbody>
 								@foreach($categories as $category)
+								@if(!isset($category->parentcategory->category_name))
+								<?php $parent_category="Root"; ?>
+								@else
+								<?php $parent_category= $category->parentcategory->category_name; ?>
+								@endif
+
 								<tr>
 									
 									<td>{{$category->id }}</td>
+									<td>{{$category->section->name }}</td>	
 									<td>{{$category->category_name }}</td>
+									<td>{{$parent_category }}</td>
                                     <td>{{$category->url}}</td>
 
 									<td>
 									@if($category->status==1)
-										<a class="updateCategoryStatus"  id="category-{{$category->id }}" category_id="{{$category->id }}" href ="javascript::void(0)"> Active </a>
+										<a class="updateCategoryStatus"  id="category-{{$category->id }}" category_id="{{$category->id }}" href ="javascript::void(0)"> <span class="badge badge-pill badge-success">Active</span> </a>
 									@else 
-									<a class="updateCategoryStatus"  id="category-{{$secategoriesction->id }}" category_id="{{$category->id }}" href ="javascript::void(0)"> Inactive </a>
+									<a class="updateCategoryStatus"  id="category-{{$category->id }}" category_id="{{$category->id }}" href ="javascript::void(0)"> <span class="badge badge-pill badge-danger">Inactive</span> </a>
 									@endif
 									</td>
+									
 
 									<td>
 										<div class="dropdown">
@@ -79,13 +90,14 @@
 											</a>
 											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
+												<a class="dropdown-item" href="{{url ('admin/add-edit-category/'.$category->id) }}"><i class="dw dw-edit2"></i> Edit</a>
+												<a href="javascript:void(0)"  class ="confirmDelete dropdown-item" record="category" recordid="{{ $category->id }}" 
+												><i class="dw dw-edit2"></i> Delete</a>
 											</div>
 										</div>
 									</td>
 								</tr>
-								@endforeach  
+								@endforeach
 							</tbody>
 						</table>
 					</div>
