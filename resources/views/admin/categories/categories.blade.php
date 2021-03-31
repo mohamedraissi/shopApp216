@@ -50,8 +50,8 @@
 									
 									<th>ID</th>
 									<th>Section</th>
+                                    <th>parent Category</th>
 									<th>Category</th>
-									<th>Parent Category</th>
                                     <th>URL</th>
 									<th>Status</th>
 									<th>action</th>
@@ -60,28 +60,21 @@
 							    </thead>
 							    <tbody>
 								@foreach($categories as $category)
-								@if(!isset($category->parentcategory->category_name))
-								<?php $parent_category="Root"; ?>
-								@else
-								<?php $parent_category= $category->parentcategory->category_name; ?>
-								@endif
-
 								<tr>
 									
 									<td>{{$category->id }}</td>
-									<td>{{$category->section->name }}</td>	
+									<td>{{$category->section->name }}</td>
+                                    <td>@if(!empty($category->parentcategory->category_name )){{$category->parentcategory->category_name }} @else Root @endif</td>
 									<td>{{$category->category_name }}</td>
-									<td>{{$parent_category }}</td>
                                     <td>{{$category->url}}</td>
 
 									<td>
 									@if($category->status==1)
-										<a class="updateCategoryStatus"  id="category-{{$category->id }}" category_id="{{$category->id }}" href ="javascript::void(0)"> <span class="badge badge-pill badge-success">Active</span> </a>
+										<a class="updateCategoryStatus"  id="category-{{$category->id }}" category_id="{{$category->id }}" href ="javascript::void(0)"> Active </a>
 									@else 
-									<a class="updateCategoryStatus"  id="category-{{$category->id }}" category_id="{{$category->id }}" href ="javascript::void(0)"> <span class="badge badge-pill badge-danger">Inactive</span> </a>
+									<a class="updateCategoryStatus"  id="category-{{$category->id }}" category_id="{{$category->id }}" href ="javascript::void(0)"> Inactive </a>
 									@endif
 									</td>
-									
 
 									<td>
 										<div class="dropdown">
@@ -90,14 +83,16 @@
 											</a>
 											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-												<a class="dropdown-item" href="{{url ('admin/add-edit-category/'.$category->id) }}"><i class="dw dw-edit2"></i> Edit</a>
-												<a href="javascript:void(0)"  class ="confirmDelete dropdown-item" record="category" recordid="{{ $category->id }}" 
-												><i class="dw dw-edit2"></i> Delete</a>
+												<a class="dropdown-item" href="{{url('admin/add-edit-category/'.$category->id) }}"><i class="dw dw-edit2"></i> Edit</a>
+
+												<a   href="javascript:void(0)" class ="confirmDelete dropdown-item"    record="{{$category->category_name}}" recordid="{{$category->id }}" 
+												<?php /* href="{{url('admin/delete-category/'.$category->id) }}" */ ?>>
+												 <i class="dw dw-delete-2"></i> Delete</a>
 											</div>
 										</div>
 									</td>
 								</tr>
-								@endforeach
+								@endforeach  
 							</tbody>
 						</table>
 					</div>
@@ -108,7 +103,7 @@
 				
 			</div>
 			<div class="footer-wrap pd-20 mb-20 card-box">
-				DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit Hingarajiya</a>
+				DeskApp - Bootstrap 4 Admin Template By <a href="#" target="_blank">Ankit Hingarajiya</a>
 			</div>
 		</div>
 	</div>

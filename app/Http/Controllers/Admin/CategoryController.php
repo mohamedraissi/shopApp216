@@ -159,7 +159,7 @@ public function deleteCategoryImage($id){
 }
 public function deleteCategory($category,$id){
   //Delete Category 
-  dd($id);
+  //dd($id);
   Category::where('id',$id)->delete();
   $message = 'Category '.$category.' has been deleted successfully!';
   session::flash('success_message', $message);

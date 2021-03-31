@@ -40,7 +40,7 @@
 					
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle {{$active}}">
-							<span class="micon dw dw-house-1"></span><span class="mtext">settings</span>
+							<span class="micon dw dw-settings"></span><span class="mtext">settings</span>
 						</a>
 						<ul class="submenu" {{$style}}>
                          @if (Session::get('page')=="settings")
@@ -89,7 +89,7 @@
 					
 					<li class="dropdown {{$active}} ">
 						<a href="javascript:;" class="dropdown-toggle ">
-							<span class="micon dw dw-house-1"></span><span class="mtext">Catalogues</span>
+							<span class="micon dw dw-box"></span><span class="mtext">Catalogues</span>
 						</a>
 						<ul class="submenu" {{$style}}>
                          @if (Session::get('page')=="sections")

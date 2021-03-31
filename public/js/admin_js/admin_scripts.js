@@ -57,9 +57,9 @@ $(document).ready(function(){
             success:function(resp){
               
               if (resp['status']==0){
-                  $("#category-"+category_id).html("<a class='updateSectionStatus' href ='javascript::void(0)'> Inactive </a>");
+                  $("#category-"+category_id).html("<a class='updateSectionStatus' href ='javascript::void(0)'> <span class='badge badge-pill badge-danger'>Inactive</span>  </a>");
               }else if (resp['status']==1){
-                $("#category-"+category_id).html("<a class='updateSectionStatus' href ='javascript::void(0)'> Active </a>");
+                $("#category-"+category_id).html("<a class='updateSectionStatus' href ='javascript::void(0)'> <span class='badge badge-pill badge-success'>Active</span>  </a>");
 
 
               }
@@ -78,11 +78,39 @@ $(document).ready(function(){
          url:'/admin/append-categories-level',
          data:{section_id:section_id},
          success:function(resp){
-         $("appendCategoriesLevel").html(resp);
+         $("#appendCategoriesLevel").html(resp);
          },error:function(){
              alert("Error");
          }
          });
     
     });
-});   
+    // Confirm Deletion of Record
+    /*$(".confirmDelete").click(function(){
+        var name =$(this).attr("name"); 
+        if(confirm("Are you sure to delete this "+ name+"?")){
+            return true ;
+        }
+        return false;
+         }); */
+
+    // Confirm Deletion with SweetAlert
+    $(".confirmDelete").click(function(){
+        var record =$(this).attr("record");
+        var recordid =$(this).attr("recordid"); 
+        Swal.fire({
+         title: 'Are you sure?',
+         text: "You won't be able to revert this!",
+         icon: 'warning',
+         showCancelButton: true,
+         confirmButtonColor: '#3085d6',
+         cancelButtonColor: '#d33',
+         confirmButtonText: 'Yes, delete it!'
+       }).then((result) => {
+         if (result.value) {
+          
+           window.location.href="/admin/delete-"+record+"/"+recordid;
+         }
+        });
+        });
+     });

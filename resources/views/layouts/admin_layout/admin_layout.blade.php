@@ -59,6 +59,9 @@
     
 	<script src="{{ asset('js/app.js') }}"></script>
 	<script src="{{ asset('js/admin_js/admin_scripts.js') }}"></script>
+	<!--SweetAlert Script -->
+	<script src=" https://cdn.jsdelivr.net/npm/sweetalert2@9 "></script>
+
 	@yield('js')
 </body>
 </html>
