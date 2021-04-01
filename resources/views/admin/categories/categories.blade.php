@@ -85,7 +85,7 @@
 												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
 												<a class="dropdown-item" href="{{url('admin/add-edit-category/'.$category->id) }}"><i class="dw dw-edit2"></i> Edit</a>
 
-												<a   href="javascript:void(0)" class ="confirmDelete dropdown-item"    record="{{$category->category_name}}" recordid="{{$category->id }}" 
+												<a   href="javascript:void(0)" class ="confirmDelete dropdown-item"    record="category" recordid="{{$category->id }}" 
 												<?php /* href="{{url('admin/delete-category/'.$category->id) }}" */ ?>>
 												 <i class="dw dw-delete-2"></i> Delete</a>
 											</div>

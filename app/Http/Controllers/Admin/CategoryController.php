@@ -157,11 +157,11 @@ public function deleteCategoryImage($id){
   session::flash('success_message', $message);
   return redirect()->back();
 }
-public function deleteCategory($category,$id){
+public function deleteCategory($id){
   //Delete Category 
   //dd($id);
   Category::where('id',$id)->delete();
-  $message = 'Category '.$category.' has been deleted successfully!';
+  $message = 'Category  has been deleted successfully!';
   session::flash('success_message', $message);
       return redirect()->back();
 

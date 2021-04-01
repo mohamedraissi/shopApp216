@@ -109,6 +109,14 @@
 
 							<li><a href="{{url('admin/categories')}}" class="{{$active}}">Categories</a></li>
 							
+							@if (Session::get('page')=="products")
+						 	@php $active="active"; @endphp
+						 @else
+						 	@php $active=""; @endphp
+						 @endif
+
+							<li><a href="{{url('admin/products')}}" class="{{$active}}">Products</a></li>
+							
 						</ul>
 					</li>
 					

@@ -2,6 +2,7 @@
 @section('content')
 <div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">
+	
 			<div class="min-height-200px">
 				<div class="page-header">
 					<div class="row">
@@ -13,14 +14,13 @@
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="index.html">Home</a></li>
 									<li class="breadcrumb-item active" aria-current="page">Products</li>
-									<a href="{{url('admin/add-edit-product')}}" style="max-width: 150px; float:right; display: inline-block;" class="btn btn-block btn-success"> Add product</a>
+									
 								</ol>
 							</nav>
 						</div>
 						<div class="col-md-6 col-sm-12 text-right">
 							<div class="dropdown">
-								<a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-									January 2018
+								
 								</a>
 								<div class="dropdown-menu dropdown-menu-right">
 									<a class="dropdown-item" href="#">Export List</a>
@@ -59,13 +59,15 @@
                                     <td>{{$product->product_code}}</td>
 
 									<td>
+							
 									@if($product->status==1)
-										<a class="updateproductStatus"  id="product-{{$product->id }}" product_id="{{$product->id }}" href ="javascript::void(0)"> Active </a>
+										<a class="updateProductStatus"  id="product-{{$product->id }}" product_id="{{$product->id }}" href ="javascript::void(0)"> Active </a>
 									@else 
-									<a class="updateproductStatus"  id="product-{{$seProductsction->id }}" product_id="{{$product->id }}" href ="javascript::void(0)"> Inactive </a>
+									<a class="updateProductStatus"  id="product-{{$product->id }}" product_id="{{$product->id }}" href ="javascript::void(0)"> Inactive </a>
 									@endif
 									</td>
 
+									
 									<td>
 										<div class="dropdown">
 											<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
@@ -73,8 +75,11 @@
 											</a>
 											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
+												<a class="dropdown-item" href="{{url('admin/add-edit-product/'.$product->id) }}"><i class="dw dw-edit2"></i> Edit</a>
+
+												<a   href="javascript:void(0)" class ="confirmDelete dropdown-item"    record="product" recordid="{{$product->id }}" 
+												<?php /* href="{{url('admin/delete-product/'.$product->id) }}" */ ?>>
+												 <i class="dw dw-delete-2"></i> Delete</a>
 											</div>
 										</div>
 									</td>
