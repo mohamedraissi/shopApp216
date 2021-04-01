@@ -33,9 +33,9 @@ $(document).ready(function(){
             success:function(resp){
               
               if (resp['status']==0){
-                  $("#section-"+section_id).html("<a class='updateSectionStatus' href ='javascript::void(0)'> Inactive </a>");
+                  $("#section-"+section_id).html("<a class='updateSectionStatus' href ='javascript::void(0)'> <span class='badge  badge-danger'>Inactive</span>  </a>");
               }else if (resp['status']==1){
-                $("#section-"+section_id).html("<a class='updateSectionStatus' href ='javascript::void(0)'> Active </a>");
+                $("#section-"+section_id).html("<a class='updateSectionStatus' href ='javascript::void(0)'> <span class='badge  badge-success'>Active</span> </a>");
 
 
               }
@@ -57,9 +57,9 @@ $(document).ready(function(){
             success:function(resp){
               
               if (resp['status']==0){
-                  $("#category-"+category_id).html("<a class='updateSectionStatus' href ='javascript::void(0)'> <span class='badge badge-pill badge-danger'>Inactive</span>  </a>");
+                  $("#category-"+category_id).html("<a class='updateSectionStatus' href ='javascript::void(0)'> <span class='badge  badge-danger'>Inactive</span>  </a>");
               }else if (resp['status']==1){
-                $("#category-"+category_id).html("<a class='updateSectionStatus' href ='javascript::void(0)'> <span class='badge badge-pill badge-success'>Active</span>  </a>");
+                $("#category-"+category_id).html("<a class='updateSectionStatus' href ='javascript::void(0)'> <span class='badge  badge-success'>Active</span>  </a>");
 
 
               }
@@ -151,9 +151,9 @@ $(document).ready(function(){
             success:function(resp){
               
               if (resp['status']==0){
-                  $("#product-"+product_id).html("<a class='updateProductStatus' href ='javascript::void(0)'> Inactive </a>");
+                  $("#product-"+product_id).html("<a class='updateProductStatus' href ='javascript::void(0)'> <span class='badge badge-danger'>Inactive </span></a>");
               }else if (resp['status']==1){
-                $("#product-"+product_id).html("<a class='updateProductStatus' href ='javascript::void(0)'> Active </a>");
+                $("#product-"+product_id).html("<a class='updateProductStatus' href ='javascript::void(0)'><span class='badge badge-success'> Active </span> </a>");
 
 
               }

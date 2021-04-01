@@ -2,7 +2,6 @@
 @section('content')
 <div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">
-	
 			<div class="min-height-200px">
 				<div class="page-header">
 					<div class="row">
@@ -12,7 +11,7 @@
 							</div>
 							<nav aria-label="breadcrumb" role="navigation">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+									<li class="breadcrumb-item"><a href="{{url('admin/dashboard')}}">Home</a></li>
 									<li class="breadcrumb-item active" aria-current="page">Products</li>
 									
 								</ol>
@@ -20,7 +19,7 @@
 						</div>
 						<div class="col-md-6 col-sm-12 text-right">
 							<div class="dropdown">
-								
+							<a href="{{url('admin/add-edit-product')}}" style="max-width: 150px; float:right; display: inline-block;" class="btn btn-block btn-success"> Add Product</a>
 								</a>
 								<div class="dropdown-menu dropdown-menu-right">
 									<a class="dropdown-item" href="#">Export List</a>
@@ -35,16 +34,17 @@
 				<div class="card-box mb-30">
 					<div class="pd-20">
 						<h4 class="text-blue h4">Products</h4>
-						<p class="mb-0">you can find more options <a class="text-primary" href="https://datatables.net/" target="_blank">Click Here</a></p>
 					</div>
 					<div class="pb-20">
-						<table class="data-table table stripe hover nowrap">
+						<table class="data-table table nowrap dataTable no-footer dtr-inline collapsed">
 							<thead>
 								<tr>
 									
 									<th>ID</th>
 									<th>Product name</th>
                                     <th>Product code</th>
+									<th>Category</th>
+									<th>Section</th>
 									<th>Status</th>
 									<th>action</th>
 									
@@ -57,13 +57,15 @@
 									<td>{{$product->id }}</td>
 									<td>{{$product->product_name }}</td>
                                     <td>{{$product->product_code}}</td>
+									<td>{{$product->category->category_name}}</td>
+									<td>{{$product->section->name}}</td>
 
 									<td>
 							
 									@if($product->status==1)
-										<a class="updateProductStatus"  id="product-{{$product->id }}" product_id="{{$product->id }}" href ="javascript::void(0)"> Active </a>
+										<a class="updateProductStatus "  id="product-{{$product->id }}" product_id="{{$product->id }}" href ="javascript::void(0)"> <span class="badge badge-success">	Active</span> </a>
 									@else 
-									<a class="updateProductStatus"  id="product-{{$product->id }}" product_id="{{$product->id }}" href ="javascript::void(0)"> Inactive </a>
+									<a class="updateProductStatus "  id="product-{{$product->id }}" product_id="{{$product->id }}" href ="javascript::void(0)"> <span class="badge badge-success">Inactive</span>   </a>
 									@endif
 									</td>
 

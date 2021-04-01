@@ -11,9 +11,15 @@ class ProductsController extends Controller
 {
     public function products(){
         Session::put('page',"products");
-        $products = Product::get();
+        $products = Product::with(['category'=> function($query){
+            $query->select('id','category_name');
+        }
+        ,'section'=>function($query){
+            $query->select('id','name');
+        }])->get();
         //$products = json_decode(json_encode($products));
         //echo"<pre>"; print_r($products);
+        //dd( $products);
         return view('admin.products.products')->with(compact('products'));
 
     }
@@ -39,5 +45,26 @@ class ProductsController extends Controller
         session::flash('success_message', $message);
             return redirect()->back();
       
+      }
+      public function addEditProduct(Request $request,$id=null){
+        if ($id==""){
+            //Add Product Functionality
+             $title="Add Product";
+             $product = new Product;
+             $productdata = array();
+             $getProducts=array();
+             $message ="category added successfully!";
+        }
+        else{
+            $title="Edit Product";
+        }
+
+        //filter arrays
+        $fabricArray=array('cotton','polyester','wool');
+        $sleeveArray=array('full seleeve','half seleeve','short seleeve');
+        $patternarrayArray=array('checked','plain','printed');
+        $occassionArray=array('Regular','slim');
+        $occassionArray=array('casual','formal');
+        return view('admin.products.add_edit_product')->with(compact(['title','productdata','getProducts']));
       }
 }

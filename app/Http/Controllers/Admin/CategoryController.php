@@ -39,7 +39,7 @@ public function updateCategoryStatus (Request $request){
      $category = new Category;
      $categorydata = array();
      $getCategories=array();
-     $message ="category updated successfully!";
+     $message ="category added successfully!";
 
    }else {
     //Edit Category Functionlity

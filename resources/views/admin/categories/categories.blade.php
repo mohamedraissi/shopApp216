@@ -19,7 +19,7 @@
 							</div>
 							<nav aria-label="breadcrumb" role="navigation">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+									<li class="breadcrumb-item"><a href="{{url('admin/dashboard')}}">Home</a></li>
 									<li class="breadcrumb-item active" aria-current="page">Categories</li>
 									
 								</ol>
@@ -70,9 +70,9 @@
 
 									<td>
 									@if($category->status==1)
-										<a class="updateCategoryStatus"  id="category-{{$category->id }}" category_id="{{$category->id }}" href ="javascript::void(0)"> Active </a>
+										<a class="updateCategoryStatus "  id="category-{{$category->id }}" category_id="{{$category->id }}" href ="javascript::void(0)"> <span class="badge badge-success">	Active</span> </a>
 									@else 
-									<a class="updateCategoryStatus"  id="category-{{$category->id }}" category_id="{{$category->id }}" href ="javascript::void(0)"> Inactive </a>
+									<a class="updateCategoryStatus"  id="category-{{$category->id }}" category_id="{{$category->id }}" href ="javascript::void(0)"><span class="badge badge-danger">Inactive</span>  </a>
 									@endif
 									</td>
 
