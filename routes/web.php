@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Client\ClientController;
 
 
@@ -59,11 +60,18 @@ Route::prefix('/admin')->namespace('Admin')->group(function(){
   Route::post('append-categories-level',[CategoryController::class,'appendCategoryLevel']);
   Route::get('delete-category-image/{id}' , [CategoryController::class, 'deleteCategoryImage']);
   Route::get('delete-category/{id}' , [CategoryController::class, 'deleteCategory']);
-  //product
+   //Brands
+ Route::get ('brands',[BrandController::class,'brands']);
+ Route::post('update-brand-status', [BrandController::class,'updateBrandStatus'] );
+ Route::match(['get','post'], 'add-edit-brand/{id?}',[BrandController::class,'addEditBrand']);
+ Route::get('delete-brand/{id}' , [BrandController::class, 'deleteBrand']);
+ //product
   Route::get('products', [ProductsController::class,'products']);
   Route::post('update-product-status', [ProductsController::class,'updateProductStatus'] );
   Route::get('delete-product/{id}', [ProductsController::class,'deleteProduct'] );
   Route::match(['get','post'], 'add-edit-product/{id?}',[ProductsController::class,'addEditProduct']);
+  Route::get('delete-product-image/{id}' , [ProductsController::class, 'deleteProductImage']);
+  Route::get('delete-product-video/{id}' , [ProductsController::class, 'deleteProductVideo']);
   
   });
 });

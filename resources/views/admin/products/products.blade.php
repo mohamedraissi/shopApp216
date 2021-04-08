@@ -43,6 +43,7 @@
 									<th>ID</th>
 									<th>Product name</th>
                                     <th>Product code</th>
+									<th>Product image</th>
 									<th>Category</th>
 									<th>Section</th>
 									<th>Status</th>
@@ -56,7 +57,15 @@
 									
 									<td>{{$product->id }}</td>
 									<td>{{$product->product_name }}</td>
-                                    <td>{{$product->product_code}}</td>
+									<td>{{$product->product_code }}</td>
+                                    <td>
+									<?php $product_image_path ="images/product_images/small/".$product->main_image; ?>
+									@if(!empty($product->main_image) && file_exists($product_image_path))
+									<img style="width : 100px;" src="{{ asset('images/product_images/small/'.$product->main_image) }}">
+									@else
+									<img style="width : 100px;" src="{{ asset('images/product_images/small/pasImage.png') }}">
+									@endif 
+									</td>
 									<td>{{$product->category->category_name}}</td>
 									<td>{{$product->section->name}}</td>
 
@@ -65,7 +74,8 @@
 									@if($product->status==1)
 										<a class="updateProductStatus "  id="product-{{$product->id }}" product_id="{{$product->id }}" href ="javascript::void(0)"> <span class="badge badge-success">	Active</span> </a>
 									@else 
-									<a class="updateProductStatus "  id="product-{{$product->id }}" product_id="{{$product->id }}" href ="javascript::void(0)"> <span class="badge badge-success">Inactive</span>   </a>
+									    <a class="updateProductStatus "  id="product-{{$product->id }}" product_id="{{$product->id }}" href ="javascript::void(0)"> <span class="badge badge-danger">Inactive</span>   </a>
+									
 									@endif
 									</td>
 
@@ -79,7 +89,7 @@
 												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
 												<a class="dropdown-item" href="{{url('admin/add-edit-product/'.$product->id) }}"><i class="dw dw-edit2"></i> Edit</a>
 
-												<a   href="javascript:void(0)" class ="confirmDelete dropdown-item"    record="product" recordid="{{$product->id }}" 
+												<a   href="javascript:void(0)" class ="confirmDelete dropdown-item"    record="{{$product->product_name}}" recordid="{{$product->id }}" 
 												<?php /* href="{{url('admin/delete-product/'.$product->id) }}" */ ?>>
 												 <i class="dw dw-delete-2"></i> Delete</a>
 											</div>

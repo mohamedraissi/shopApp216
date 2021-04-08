@@ -59,9 +59,24 @@
                         <div class="form-group col-md-6 col-sm-12">
 							<label class="col-sm-12  col-form-label">Select Category</label>
 							<div class="col-sm-12 col-md-12">
-							<select name="category_id" id="section_id" class="custom-select2 form-control select2-hidden-accessible" style ="width:100%;">
-							<option value="0">select Category</option> 
-								
+							<select name="category_id" id="category_id" class="custom-select2 form-control select2-hidden-accessible" style ="width:100%;">
+							<option value="">select Category</option> 
+							@if(isset($categories))
+							@foreach($categories as $section)
+							   <optgroup label="{{ $section['name'] }}"></optgroup>
+							   @foreach($section['categories'] as $category)
+							     <option value="{{ $category['id'] }}" @if(!empty(@old('category_id'))&& $category['id']==@old('category_id')) selected="" 
+								 @elseif(!empty($productdata['category_id']) && $productdata['category_id']==$category['id']) selected="" @endif>{{ $category['category_name'] }}
+								 </option> 
+								   @foreach($category['subcategories'] as $subcategory)
+							         <option value="{{ $subcategory['category_name'] }}" @if(!empty(@old('category_id'))&& $category['id']==@old('category_id')) selected="" 
+									 @elseif(!empty($productdata['category_id']) && $productdata['category_id']==$subcategory['id']) selected="" @endif>{{ $subcategory['category_name'] }}
+								     </option> 
+							       @endforeach
+							   @endforeach
+
+							@endforeach	
+							@endif	
 							</select>	
 							</div>
 						</div> 
@@ -82,13 +97,7 @@
 								
 							</div>
 						</div>
-                        <div class="form-group col-md-6 col-sm-12">
-							<label class="col-sm-12  col-form-label">product color</label>
-							<div class="col-sm-12 col-md-12">
-								<input  type="text" class="form-control" name="product_color" id="product_color" placeholder="Enter product Color" 
-								@if (!empty ($productdata['product_color'] )) value="{{$productdata['product_color']}}" @else value="{{old ('product_color') }}" @endif>
-							</div>
-						</div>
+                       
 
                         <div class="form-group col-md-6 col-sm-12">
 							<label class="col-sm-12  col-form-label">product Price</label>
@@ -104,13 +113,7 @@
 								@if (!empty ($productdata['product_discount'] )) value="{{$productdata['product_discount']}}" @else value="{{old ('product_discount') }}" @endif>
 							</div>
 						</div>
-						<div class="form-group col-md-6 col-sm-12">
-							<label class="col-sm-12  col-form-label">Product Weight</label>
-							<div class="col-sm-12 col-md-12">
-								<input  type="text" class="form-control"  id="product_weight" name="product_weight" placeholder="Enter product Weight" 
-								@if (!empty ($productdata['product_weight'] )) value="{{$productdata['product_weight']}}" @else value="{{old ('product_weight') }}" @endif>
-							</div>
-						</div>
+						
 						
 						<div class="form-group col-md-6 col-sm-12">
 							<label for="exampleInputFile" class="col-sm-12  col-form-label">product Main Image</label>
@@ -120,19 +123,33 @@
 									<input type="file" class="custom-file-input form-control" id="main_image" name="main_image">
 									<label for="main_image" class="custom-file-label col-sm-12  col-form-label">Choose file</label>
 								</div>
+								
 								@endif
+								@if(!empty($productdata['main_image'])) 
+										<div class="d-flex align-items-center"> <img style="width:100px; margin-top:5px; " src="{{asset('images/product_images/small/'.$productdata['main_image']) }}" alt="">
+										<a class="confirmDelete ml-4"  href="javascript:void(0)" record="product-image" recordid="{{$productdata['id'] }}">  Delete image </a>
+										</div>
+									@endif
 							</div>
 							   
 						</div>
                         <div class="form-group col-md-6 col-sm-12">
-							<label for="exampleInputFile" class="col-sm-12  col-form-label">product Main video</label>
-							<div class="col-sm-12 col-md-12">
-							@if(empty($productdata['product_video'])) 
+							<label for="exampleInputFile" class="col-sm-12  col-form-label">product  video</label>
+							<div class="col-sm-12 col-md-12"> 
 								<div class="custom-file ">
-									<input type="file" class="custom-file-input form-control" id="main_video" name="main_video">
-									<label for="main_video" class="custom-file-label col-sm-12  col-form-label">Choose file</label>
+									<input type="file" class="custom-file-input form-control" id="product_video" name="product_video">
+									<label for="product_video" class="custom-file-label col-sm-12  col-form-label">Choose file</label>
 								</div>
-								@endif
+								
+							    @if(!empty($productdata['product_video']))
+							       <div><a href="{{ url('videos/product_videos/'.$productdata['product_video']) }}" download>Download</a>
+							      &nbsp;|&nbsp;
+							     <a class="confirmDelete ml-4"  href="javascript:void(0)" record="product-video" recordid="{{$productdata['id'] }}">  Delete Video </a>
+							     </div>
+							    @endif 
+								
+
+								
 							</div>
 							   
 						</div>
@@ -141,42 +158,19 @@
 						<div class="form-group col-md-6 col-sm-12">
 							<label class="col-sm-12  col-form-label">Product Description</label>
 							<div class="col-sm-12 col-md-12">
-								<textarea name="description" id="description" class="form-control"  placeholder="Enter ..." >
-								@if (!empty ($productdata['description'] )) {{$productdata['description']}} @else {{old ('description') }} @endif</textarea >
+								<textarea name="product_description" id="product_description" class="form-control"  placeholder="Enter ..." >
+								@if (!empty ($productdata['product_description'] )) {{$productdata['product_description']}} @else {{old ('product_description') }} @endif</textarea >
 							</div>
 						</div>
 
-                        <div class="form-group col-md-6 col-sm-12">
-							<label class="col-sm-12  col-form-label">Wash Care </label>
-							<div class="col-sm-12 col-md-12">
-								<textarea name="wash_care" id="wash_care" class="form-control"  placeholder="Enter ..." >
-								@if (!empty ($productdata['wash_care'] )) {{$productdata['wash_care']}} @else {{old ('wash_care') }} @endif</textarea >
-							</div>
-						</div>
-						
-						<div class="form-group col-md-6 col-sm-12">
-							<label class="col-sm-12  col-form-label">Product URL</label>
-							<div class="col-sm-12 col-md-12">
-								<input  type="text" class="form-control"  id="url" name="url" placeholder="Enter product Name"
-								@if (!empty ($productdata['url'] )) value="{{$productdata['url']}}" @else value="{{old ('url') }}" @endif>
-							</div>
-						</div>	
-
-
-						<div class="form-group col-md-6 col-sm-12">
-							<label class="col-sm-12  col-form-label">Meta Title</label>
-							<div class="col-sm-12 col-md-12">
-							<textarea  id="meta_title" name="meta_title" type="text" class="form-control"  placeholder="Enter...">
-							@if (!empty ($productdata['meta_title'] ))  {{$productdata['meta_title']}} @else {{old ('meta_title') }} @endif
-							</textarea>
-							</div>
-						</div>
+                        
+					
 
 						<div class="form-group col-md-6 col-sm-12">
 							<label class="col-sm-12  col-form-label">Meta Description</label>
 							<div class="col-sm-12 col-md-12">
-							<textarea id="meta_description" name="meta_description" type="text" class="form-control"  placeholder="Enter...">
-							@if (!empty ($productdata['meta_description'] )) {{$productdata['meta_description']}} @else {{old ('meta_description') }} @endif
+							<textarea id="product_meta_description" name="product_meta_description" type="text" class="form-control"  placeholder="Enter...">
+							@if (!empty ($productdata['product_meta_description'] )) {{$productdata['product_meta_description']}} @else {{old ('product_meta_description') }} @endif
 							</textarea>
 							</div>
 						</div>
@@ -184,8 +178,8 @@
 						<div class="form-group col-md-6 col-sm-12">
 							<label class="col-sm-12  col-form-label">Meta Keywords </label>
 							<div class="col-sm-12 col-md-12">
-								<textarea  id="meta_keywords" name="meta_keywords" type="text" class="form-control"  placeholder="Enter...">
-								@if (!empty ($productdata['meta_keywords'] )) {{$productdata['meta_keywords']}} @else {{old ('meta_keywords') }} @endif</textarea>
+								<textarea  id="product_meta_keyword" name="product_meta_keyword" type="text" class="form-control"  placeholder="Enter...">
+								@if (!empty ($productdata['product_meta_keyword'] )) {{$productdata['product_meta_keyword']}} @else {{old ('product_meta_keyword') }} @endif</textarea>
 							</div>
 						</div>
 
