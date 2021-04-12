@@ -50,7 +50,7 @@ public function updateCategoryStatus (Request $request){
      $getCategories = json_decode(json_encode($getCategories),true);
      $category = Category::find($id);
      $message ="category updated successfully!";
-
+     $imageName= $category->category_image;
    }
 
    if ($request->isMethod('post')){

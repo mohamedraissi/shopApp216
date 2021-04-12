@@ -2,6 +2,14 @@
 @section('content')
 <div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">
+		@if(Session::has('success_message'))
+			<div class="alert alert-success" role="alert">
+             {{ Session::get('success_message')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+             </div>
+        @endif
 			<div class="min-height-200px">
 				<div class="page-header">
 					<div class="row">
@@ -18,14 +26,8 @@
 						</div>
 						<div class="col-md-6 col-sm-12 text-right">
 							<div class="dropdown">
-								<a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-									January 2018
-								</a>
-								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="#">Export List</a>
-									<a class="dropdown-item" href="#">Policies</a>
-									<a class="dropdown-item" href="#">View Assets</a>
-								</div>
+							<a href="{{url('admin/add-edit-section')}}" style="max-width: 150px; float:right; display: inline-block;" class="btn btn-block btn-success"> Add Section</a>
+								
 							</div>
 						</div>
 					</div>
@@ -69,8 +71,8 @@
 											</a>
 											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
+												<a class="dropdown-item" href="{{url('admin/add-edit-section/'.$section->id) }}"><i class="dw dw-edit2"></i> Edit</a>
+												<a  href="javascript:void(0)" class ="confirmDelete dropdown-item"    record="section" recordid="{{$section->id }}" ><i class="dw dw-delete-3"></i> Delete</a>
 											</div>
 										</div>
 									</td>

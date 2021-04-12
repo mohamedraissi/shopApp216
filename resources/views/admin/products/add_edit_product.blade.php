@@ -61,7 +61,7 @@
 							<div class="col-sm-12 col-md-12">
 							<select name="category_id" id="category_id" class="custom-select2 form-control select2-hidden-accessible" style ="width:100%;">
 							<option value="">select Category</option> 
-							@if(isset($categories))
+							
 							@foreach($categories as $section)
 							   <optgroup label="{{ $section['name'] }}"></optgroup>
 							   @foreach($section['categories'] as $category)
@@ -76,7 +76,6 @@
 							   @endforeach
 
 							@endforeach	
-							@endif	
 							</select>	
 							</div>
 						</div> 

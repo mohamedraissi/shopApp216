@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Section;
 use App\Models\Category;
+use App\Models\ProductsAttribute;
 use Session;
 use Image;
 
@@ -93,15 +94,13 @@ class ProductsController extends Controller
      $this->validate($request,$rules,$customMessages);
 
      //upload product image
-     $image_name="";
      if($request->hasFile('main_image')){
          $image_tmp = $request->file('main_image');
          if($image_tmp->isValid()){
              //get original image name
-             $image_name = pathinfo($image_tmp->getClientOriginalName(),PATHINFO_FILENAME);
+             $image_name = $image_tmp->getClientOriginalName();
              //get image extension
              $extension = $image_tmp->getClientOriginalExtension();
-             //dd($image_name);
              //generate new image name
              $imageName = $image_name.'-'.rand(111,99999).'.'.$extension;
              //set paths for small , medium and large images
@@ -119,7 +118,6 @@ class ProductsController extends Controller
          }
      }
      //upload product video
-     $video_name="";
      if($request->hasFile('product_video')){
          $video_tmp = $request->file('product_video');
          if($video_tmp->isValid()){
@@ -198,7 +196,7 @@ class ProductsController extends Controller
           unlink($small_image_path.$productImage->main_image);
         }
         if (file_exists($medium_image_path.$productImage->main_image)){
-            unlink($medium_image_path.$productImage->main_image);
+            unlink($medium_path.$productImage->main_image);
           }
           if (file_exists($large_image_path.$productImage->main_image)){
             unlink($large_image_path.$productImage->main_image);
@@ -227,5 +225,67 @@ class ProductsController extends Controller
         $message ='product video has been deleted successfully!';
         session::flash('success_message', $message);
         return redirect()->back();
+      }
+
+      public function addAttributes(Request $request,$id){
+        if($request->isMethod('post')){
+          $data = $request->all();
+          //echo "<pre>";print_r($data); die;
+          foreach ($data['sku'] as $key =>$value){
+            if(!empty($value)){
+              //sku alreasy exists check
+              $attrCountSKU = ProductsAttribute::where('sku',$value)->count();
+              if($attrCountSKU>0){
+                $message = 'SKU already exists.Please add another SKU!';
+                session::flash('error_message',$message);
+                return redirect()->back();
+              }
+              //size alreasy exists check
+              $attrCountSize = ProductsAttribute::where(['product_id'=>$id,'size'=>$data['size'][$key]])->count();
+              if($attrCountSize>0){
+                $message = 'Size already exists.Please add another Size!';
+                session::flash('error_message',$message);
+                return redirect()->back();
+              }
+
+              $attribute = new ProductsAttribute;
+              $attribute->product_id = $id;
+              $attribute->sku = $value;
+              $attribute->size = $data['size'][$key];
+              $attribute->price = $data['price'][$key];
+              $attribute->stock = $data['stock'][$key];
+              $attribute->status=1;
+              $attribute->save();
+
+
+            }
+          }
+                $success_message = 'Product Attributes has been added successfully!';
+                session::flash('success_message',$success_message);
+                return redirect()->back();
+        }
+
+        $productdata = Product::select('id','product_name','product_code','main_image')->with('attributes')->find($id);
+        $productdata = json_decode(json_encode($productdata),true);
+        //echo "<pre>";print_r($productdata); die;
+        $title = "Product Attributes";
+        return view('admin.products.add_attributes')->with(compact('productdata','title'));
+      }
+      public function editAttributes(Request $request,$id){
+        if($request->isMethod('post')){
+          $data = $request->all();
+         //echo "<pre>";print_r($data);die;
+         
+          foreach((array)$data['attrId'] as $key => $attr) {
+           if(!empty($attr)){
+             ProductsAttribute::where(['id'=>$data['attrId'][$key]])->update(['price'=>$data
+             ['price'][$key],'stock'=>$data['stock'][$key]]);
+           }
+         }
+        
+         $success_message = 'Product Attributes has been updated successfully!';
+                session::flash('success_message',$success_message);
+                return redirect()->back();
+        }
       }
 }

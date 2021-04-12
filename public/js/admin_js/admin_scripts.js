@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    //rim
     // verifier si mot de passe d'admin est correct
     $("#current_pwd").keyup(function(){
         var current_pwd = $("#current_pwd").val();
@@ -21,7 +20,7 @@ $(document).ready(function(){
             }
         })
     })
-    //Nour
+    
     // Update Section Status
     $(" .updateSectionStatus").click(function(){
         var status =$(this).text();
@@ -85,14 +84,7 @@ $(document).ready(function(){
          });
     
     });
-    // Confirm Deletion of Record
-    /*$(".confirmDelete").click(function(){
-        var name =$(this).attr("name"); 
-        if(confirm("Are you sure to delete this "+ name+"?")){
-            return true ;
-        }
-        return false;
-         }); */
+   
 
     // Confirm Deletion with SweetAlert
     $(".confirmDelete").click(function(){
@@ -108,7 +100,6 @@ $(document).ready(function(){
          confirmButtonText: 'Yes, delete it!'
        }).then((result) => {
          if (result.value) {
-          
            window.location.href="/admin/delete-"+record+"/"+recordid;
          }
         });
@@ -141,30 +132,30 @@ $(document).ready(function(){
         });
 
     });
-      // Update Product Status
-    // $(" .updateProductStatus").click(function(){
-    //     var status =$(this).text();
-    //     var section_id=$(this).attr("product_id=");
-    //     $.ajax({
-    //         type:'post',
-    //         url: '/admin/update-product-status',
-    //         data:{status:status, product_id:product_id},
-    //         success:function(resp){
+    // update banner status
+    $(" .updateBannerStatus").click(function(){
+        var status =$(this).text();
+        var banner_id=$(this).attr("banner_id");
+        $.ajax({
+            type:'post',
+            url: '/admin/update-banner-status',
+            data:{status:status, banner_id:banner_id},
+            success:function(resp){
               
-    //           if (resp['status']==0){
-    //               $("#product-"+product_id).html("<a href='javascript::void(0)' class='updateProductStatus' > Inactive </a>");
-    //           }else if (resp['status']==1){
-    //             $("#product-"+product_id).html("<a href='javascript::void(0)' class='updateProductStatus' href ='javascript::void(0)'> Active </a>");
+              if (resp['status']==0){
+                  $("#banner-"+banner_id).html("<a class='updateBannerStatus' href ='javascript::void(0)'> <span class='badge badge-danger'>Inactive </span></a>");
+              }else if (resp['status']==1){
+                $("#banner-"+banner_id).html("<a class='updateBannerStatus' href ='javascript::void(0)'><span class='badge badge-success'> Active </span> </a>");
 
 
-    //           }
+              }
                    
-    //         },error:function(){
-    //             alert("Error");
-    //         }
-    //     });
-
-    // });
+            },error:function(){
+                alert("Error");
+            }
+        });
+        
+    });
     // Update Section Status
     $(" .updateProductStatus").click(function(){
         var status =$(this).text();
@@ -188,5 +179,27 @@ $(document).ready(function(){
             }
         });
     });
-
-     
+//add attr product
+    var maxField = 10; //Input fields increment limitation
+    var addButton = $('.add_button'); //Add button selector
+    var wrapper = $('.field_wrapper'); //Input field wrapper
+    var fieldHTML = '<div class="mt-2"><div style=""height:10px;></div><input type="text" name="size[]" style="width:120px"/>&nbsp;<input type="text" name="sku[]" style="width:120px"/>&nbsp<input type="text" name="price[]" style="width:120px"/>&nbsp;<input type="text" name="stock[]" style="width:120px"/>&nbsp;<a href="javascript:void(0);" class="remove_button">Delete</a></div>'; //New input field html 
+    var x = 1; //Initial field counter is 1
+   
+    
+    //Once add button is clicked
+    $(addButton).click(function(){
+        //Check maximum number of input fields
+        
+        if(x < maxField){ 
+            x++; //Increment field counter
+            $(wrapper).append(fieldHTML); //Add field html
+        }
+    });
+    
+    //Once remove button is clicked
+    $(wrapper).on('click', '.remove_button', function(e){
+        e.preventDefault();
+        $(this).parent('div').remove(); //Remove field html
+        x--; //Decrement field counter
+    });

@@ -1,5 +1,9 @@
 
-  
+  <?php
+  use App\Models\Section;
+  $sections =Section::sections();
+  //echo"<pre>";print_r($sections);die;
+  ?>
   <header class="header-section">
     <div class="header-top">
         <div class="container">
@@ -113,45 +117,30 @@
     </div>
     <div class="nav-item">
         <div class="container">
-            <div class="nav-depart">
-                <div class="depart-btn">
-                    <i class="ti-menu"></i>
-                    <span>All departments</span>
-                    <ul class="depart-hover">
-                        <li class="active"><a href="#">Women’s Clothing</a></li>
-                        <li><a href="#">Men’s Clothing</a></li>
-                        <li><a href="#">Underwear</a></li>
-                        <li><a href="#">Kid's Clothing</a></li>
-                        <li><a href="#">Brand Fashion</a></li>
-                        <li><a href="#">Accessories/Shoes</a></li>
-                        <li><a href="#">Luxury Brands</a></li>
-                        <li><a href="#">Brand Outdoor Apparel</a></li>
-                    </ul>
-                </div>
-            </div>
+           
+           
             <nav class="nav-menu mobile-menu">
                 <ul>
                     <li class="active"><a href="/index">Home</a></li>
                     <li><a href="/shop">Shop</a></li>
-                    <li><a href="#">Collection</a>
+                    @foreach($sections as $section)
+                    <li><a href="#">{{$section['name']}}</a>
                         <ul class="dropdown">
-                            <li><a href="#">Men's</a></li>
-                            <li><a href="#">Women's</a></li>
-                            <li><a href="#">Kid's</a></li>
+                            @foreach($section['categories'] as $category)
+                                <li><a href="#">{{$category['category_name']}}</a></li>
+                                    @foreach($category['subcategories'] as $subcategory)
+                                    <li><a href="#" class="font-weight-normal pt-0 pl-5">{{$subcategory['category_name']}}</a></li>
+                                    @endforeach
+                                    @if(count($section['categories'])>1)
+                                        <hr class="mt-0"  style="border-top: 1px solid rgb(255 255 255 / 10%);margin-left:20px;margin-right:20px;"> 
+                                    @endif
+                            @endforeach        
                         </ul>
                     </li>
+                    @endforeach
                     <li><a href="/blog">Blog</a></li>
                     <li><a href="/contact">Contact</a></li>
-                    <li><a href="#">Pages</a>
-                        <ul class="dropdown">
-                            <li><a href="/blog-details">Blog Details</a></li>
-                            <li><a href="/shopping-cart">Shopping Cart</a></li>
-                            <li><a href="/checkout">Checkout</a></li>
-                            <li><a href="/faq">Faq</a></li>
-                            <li><a href="/register">Register</a></li>
-                            <li><a href="/login">Login</a></li>
-                        </ul>
-                    </li>
+                  
                 </ul>
             </nav>
             <div id="mobile-menu-wrap"></div>

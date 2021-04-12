@@ -28,11 +28,7 @@
 						<div class="col-md-6 col-sm-12 text-right">
 							<div class="dropdown">
 								<a href="{{url('admin/add-edit-brand')}}" style="max-width: 150px; float:right; display: inline-block;" class="btn btn-block btn-success"> Add Brand</a>
-								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="#">Export List</a>
-									<a class="dropdown-item" href="#">Policies</a>
-									<a class="dropdown-item" href="#">View Assets</a>
-								</div>
+								
 							</div>
 						</div>
 					</div>

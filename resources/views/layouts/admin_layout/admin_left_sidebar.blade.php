@@ -72,7 +72,7 @@
 							</ul>
 					</li>	
 
-					@if (Session::get('page')=="sections" || Session::get('page')=="brands" ||  Session::get('page')=="categories")
+					@if (Session::get('page')=="sections" || Session::get('page')=="brands" ||  Session::get('page')=="categories" || Session::get('page')=="banners")
 							@php  
 							$active="show";
 							$style='style=display:block'
@@ -125,6 +125,12 @@
 
 							<li><a href="{{url('admin/products')}}" class="{{$active}}">Products</a></li>
 							
+							@if (Session::get('page')=="banners")
+						 	@php $active="active"; @endphp
+						 @else
+						 	@php $active=""; @endphp
+						 @endif
+							<li><a href="{{url('admin/banners')}}" class="{{$active}}">Banners</a></li>
 						</ul>
 					</li>
 					

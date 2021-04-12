@@ -92,6 +92,8 @@
 												<a   href="javascript:void(0)" class ="confirmDelete dropdown-item"    record="{{$product->product_name}}" recordid="{{$product->id }}" 
 												<?php /* href="{{url('admin/delete-product/'.$product->id) }}" */ ?>>
 												 <i class="dw dw-delete-2"></i> Delete</a>
+												 
+												<a class="dropdown-item" href="{{ url('admin/add-attributes/'.$product->id) }}"><i class="icon-copy dw dw-add"></i> add</a>
 											</div>
 										</div>
 									</td>
