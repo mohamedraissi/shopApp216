@@ -94,7 +94,6 @@
 												 <i class="dw dw-delete-2"></i> Delete</a>
 												 
 												<a class="dropdown-item" href="{{ url('admin/add-attributes/'.$product->id) }}"><i class="icon-copy dw dw-add"></i> add</a>
-												<a class="dropdown-item" href="{{ url('admin/add-images/'.$product->id) }}"><i class="icon-copy dw dw-add"></i> Image</a>
 											</div>
 										</div>
 									</td>

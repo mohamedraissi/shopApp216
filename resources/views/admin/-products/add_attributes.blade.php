@@ -65,17 +65,17 @@
 					
 						<div class="row">
                 
-						<div class="form-group col-md-6 col-sm-12">
+						<div class="form-group col-md-4 col-sm-12">
 							<label class="col-sm-12  col-form-label">product Name: {{$productdata['product_name']}} </label>
 							
 						</div>
 
-                        <div class="form-group col-md-6 col-sm-12">
+                        <div class="form-group col-md-8 col-sm-12">
 							<label class="col-sm-12  col-form-label">product code: {{$productdata['product_code']}} </label>
 							
 						</div>
                   
-						<div class="form-group col-md-6 col-sm-12">
+						<div class="form-group col-md-4 col-sm-12">
 							<label for="exampleInputFile" class="col-sm-12  col-form-label">product Main Image</label>
 							<div class="col-sm-12 col-md-12">
 							
@@ -86,9 +86,9 @@
 							</div>
 							   
 						</div>
-                        <div class="form-group col-md-6 col-sm-12">
+                        <div class="form-group col-md-8 col-sm-12">
                           <div class="field_wrapper">
-                              <div>
+                              <div class="mt-2">
                                   <input id="size" name="size[]" type="text" name="size[]" value="" placeholder="size" style="width:120px;" required="" />
 								  <input id="sku" name="sku[]" type="text" name="sku[]" value="" placeholder="sku" style="width:120px;" required="" />
 								  <input id="price" name="price[]" type="number" name="price[]" value="" placeholder="price" style="width:120px;" required="" />
@@ -126,7 +126,6 @@
                                     <th>SKU</th>
 									<th>Price</th>
 									<th>Stock</th>
-									<th>status</th>
 									<th>action</th>
 									
 								</tr>
@@ -145,15 +144,6 @@
 									<td>
 									<input type="number" name="stock[]" value="{{ $attribute['stock'] }}" required="">
 									</td>
-									<td>
-							
-									@if($attribute['status']==1)
-										<a class="updateAttributeStatus "  id="attribute-{{ $attribute['id'] }}" attribute_id="{{ $attribute['id'] }}" href ="javascript::void(0)"> <span class="badge badge-success">	Active</span> </a>
-									@else 
-									    <a class="updateAttributeStatus "  id="attribute-{{ $attribute['id'] }}" attribute_id="{{ $attribute['id'] }}" href ="javascript::void(0)"> <span class="badge badge-danger">Inactive</span>   </a>
-									
-									@endif
-									</td>
                                     <td>
 									<div class="dropdown">
 											<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
@@ -163,7 +153,7 @@
 												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
 												<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
 
-												<a   href="javascript:void(0)" class ="confirmDelete dropdown-item" id="attribute-{{ $attribute['id'] }}" attribute_id="{{ $attribute['id'] }}" record="attribute" recordid="{{ $attribute['id']  }}">      
+												<a   href="javascript:void(0)" class ="confirmDelete dropdown-item">     
 												
 												 <i class="dw dw-delete-2"></i> Delete</a>
 												 

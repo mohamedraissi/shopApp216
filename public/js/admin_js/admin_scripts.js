@@ -203,3 +203,49 @@ $(document).ready(function(){
         $(this).parent('div').remove(); //Remove field html
         x--; //Decrement field counter
     });
+
+    $(" .updateAttributeStatus").click(function(){
+        var status =$(this).text();
+        var attribute_id=$(this).attr("attribute_id");
+        $.ajax({
+            type:'post',
+            url: '/admin/update-attribute-status',
+            data:{status:status, attribute_id:attribute_id},
+            success:function(resp){
+             
+              if (resp['status']==0){
+                  $("#attribute-"+attribute_id).html("Inactive");
+              }else if (resp['status']==1){
+                $("#attribute-"+attribute_id).html("Active");
+
+
+              }
+                  
+            },error:function(){
+                alert("Error");
+           }
+        });
+   });
+
+   $(" .updateImageStatus").click(function(){
+    var status =$(this).text();
+    var image_id=$(this).attr("image_id");
+    $.ajax({
+        type:'post',
+        url: '/admin/update-image-status',
+        data:{status:status, image_id:image_id},
+        success:function(resp){
+         
+          if (resp['status']==0){
+              $("#image-"+image_id).html("<a class='updateProductStatus' href ='javascript::void(0)'> <span class='badge badge-danger'>Inactive </span></a>");
+          }else if (resp['status']==1){
+            $("#image-"+image_id).html("<a class='updateProductStatus' href ='javascript::void(0)'><span class='badge badge-success'> Active </span> </a>");
+
+
+          }
+              
+        },error:function(){
+            alert("Error");
+       }
+    });
+});

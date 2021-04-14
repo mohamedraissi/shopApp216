@@ -84,6 +84,10 @@ Route::prefix('/admin')->namespace('Admin')->group(function(){
    //Attributes
    Route::match(['get','post'],'add-attributes/{id}',[ProductsController::class, 'addAttributes']);
    Route::post('edit-attributes/{id}',[ProductsController::class, 'editAttributes']);
+     //image
+  Route::match(['get','post'],'add-images/{id}', [ProductsController::class,'addImages']);
+  Route::post('update-image-status', [ProductsController::class,'updateImageStatus'] );
+  Route::get('delete-image/{id}', [ProductsController::class,'deleteImage'] );
   });
 });
 
