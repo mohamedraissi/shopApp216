@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\BannersController;
 use App\Http\Controllers\Client\ClientController;
+use App\Http\Controllers\Front\ProductsController as ProductFront;
 
 
 /*
@@ -89,6 +90,7 @@ Route::prefix('/admin')->namespace('Admin')->group(function(){
   Route::post('update-image-status', [ProductsController::class,'updateImageStatus'] );
   Route::get('delete-image/{id}', [ProductsController::class,'deleteImage'] );
   });
+  
 });
 
 Route::get('index', [ClientController::class,'index']);
@@ -98,3 +100,7 @@ Route::get('contact', [ClientController::class,'contact']);
 Route::get('blog-details', [ClientController::class,'blogd']);
 Route::get('checkout', [ClientController::class,'check']);
 Route::get('shopping-cart', [ClientController::class,'shopcart']);
+Route::namespace('Front')->group(function(){
+  //Route::get('/',IndexController::class,'index');
+  Route::get('/{url}',[ProductFront::class,'listing']);
+});
