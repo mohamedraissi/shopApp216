@@ -7,8 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Section;
 use App\Models\Category;
+use App\Models\Brand;
 use App\Models\ProductsAttribute;
 use App\Models\ProductsImage;
+use App\Models\Option;
+use App\Models\OptionValues;
+use App\Models\ProductAble;
 use Session;
 use Image;
 
@@ -74,6 +78,7 @@ class ProductsController extends Controller
             //product Validation 
      $rules =[
         'category_id' => 'required',
+        'brand' => 'required',
         'product_name' => 'required|regex:/^[\pL\s\-]+$/u',
         'product_code' => 'required|regex:/^[\w-]*$/',
         'product_price' =>'required|numeric',
@@ -82,6 +87,7 @@ class ProductsController extends Controller
         
      ];
      $customMessages =[
+        'brand.required' =>'Brand  is required',
         'category_id.required' =>'Category  is required',
         'product_name.required'=>' product Name is required',
         'product_name.regex' =>' Valid product Name is required',
@@ -162,27 +168,29 @@ class ProductsController extends Controller
      $product->product_meta_description = $data['product_meta_description'];
      $product->product_meta_keyword = $data['product_meta_keyword'];
      $product->status=1;
-     
+     $product->brand_id=$data['brand'];
      $product->save();
      session::flash('success_message',$message);
      return redirect('admin/products');
 
         }
 
-        //filter arrays
-        /* $fabricArray=array('cotton','polyester','wool');
-        $sleeveArray=array('full seleeve','half seleeve','short seleeve');
-        $patternArray=array('checked','plain','printed');
-        $fitArray=array('Regular','slim');
-        $occassionArray=array('casual','formal'); */
-
+        //product arrays
+        $productFilters=Product::productFilters();
+        $fabricArray=$productFilters['fabricArray'];
+        $sleeveArray=$productFilters['sleeveArray'];
+        $patternArray=$productFilters['patternArray'];
+        $fitArray=$productFilters['fitArray'];
+        $occassionArray=$productFilters['occassionArray'];
+        
         //sections with categories and subcategories
         $categories = Section::with('categories')->get();
         $categories = json_decode(json_encode($categories),true);
         //echo"<pre>"; print_r($categories);die;
+        $brands=Brand::where("status",1)->get();
 
 
-        return view('admin.products.add_edit_product')->with(compact(['title','categories','productdata']));
+        return view('admin.products.add_edit_product')->with(compact(['title','categories','productdata','brands','fabricArray','sleeveArray','patternArray','fitArray','occassionArray']));
       }
 
       public function deleteProductImage($id){
@@ -395,6 +403,64 @@ class ProductsController extends Controller
         session::flash('success_message', $message);
         return redirect()->back();
       }
+      public function addOptions(Request $request,$id){
+        Session::put('page',"products");
+        if($request->isMethod('post')){
+          $data = $request->all();
+          $options= explode(",", $data['options']);
+          $values= explode(",", $data['values']);
+          //echo "<pre>";print_r($values); die;
+       foreach ($options as $key =>$value){
+            if(!empty($value)){
+              //sku alreasy exists check
+              $optionCount = ProductAble::where(['productable_id'=> $value ,"product_id"=>$id , "productable_type" => "App\Models\Option"])->count();
+              if($optionCount>0){
+               
+              }
+              else{
+                $value = Option::find($value);  
+  
+                $product = Product::find($id);
+                //$tag2 = Tag::find(4);
+                  
+                $value->products()->attach([$product->id]);
+              }
+            
 
+
+            }
+          }
+          foreach ($values as $key =>$value){
+            if(!empty($value)){
+              //sku alreasy exists check
+              $optionCount = ProductAble::where(['productable_id'=> $value ,"product_id"=>$id, "productable_type" => "App\Models\OptionValues"])->count();
+              if($optionCount>0){
+               
+              }
+              else{
+                $value = OptionValues::find($value);  
+  
+                $product = Product::find($id);
+                //$tag2 = Tag::find(4);
+                  
+                $value->products()->attach([$product->id]);
+              }
+            
+
+
+            }
+          }
+                $success_message = 'Product option and value has been added successfully!';
+                session::flash('success_message',$success_message);
+                return redirect()->back();
+        }
+        $options=Option::with('values')->get()->toArray();
+        //echo "<pre>" ; print_r($options); die;
+        $title ="Product options and values";
+        $productdata = Product::select('id','product_name','product_code','main_image')->with(['options','values.option'])->find($id)->toArray();
+        //echo "<pre>" ; print_r($productdata); die;
+        return view('admin.products.add_options')->with(compact('title','options','productdata'));
+      }
+      
   
 }

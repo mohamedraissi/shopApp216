@@ -14,7 +14,7 @@ class Category extends Model
         return $this->belongsTo('App\Models\Section','section_id')->select('id','name');
     }
     public function parentcategory(){
-        return $this->belongsTo('App\Models\Category','parent_id')->select('id','category_name');
+        return $this->belongsTo('App\Models\Category','parent_id')->select('id','category_name','url');
     }
     public static function categoryDetails($url){
         $categoryDetails = Category::select('id','category_name','url')->with(['subcategories'=>function($query){

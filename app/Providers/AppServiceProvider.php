@@ -4,7 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
-
+use Illuminate\Pagination\Paginator;
+use Illuminate\Database\Eloquent\Relations\Relation;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -25,5 +26,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultstringLength(191);  
+        Paginator::useBootstrap();
+        Relation::morphMap([
+            'Option' => App\Models\Option::class,
+            'OptionValue' => App\Models\OptionValue::class,
+            
+          ]);
+         
     }
 }

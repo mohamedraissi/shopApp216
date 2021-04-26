@@ -21,6 +21,29 @@ $(document).ready(function(){
         })
     })
     
+    $(" .updateOptionStatus").click(function(){
+        var status =$(this).text();
+        var option_id=$(this).attr("option_id");
+        $.ajax({
+            type:'post',
+            url: '/admin/update-option-status',
+            data:{status:status, option_id:option_id},
+            success:function(resp){
+              
+              if (resp['status']==0){
+                  $("#option-"+option_id).html("<a class='updateOptionStatus' href ='javascript::void(0)'> <span class='badge  badge-danger'>Inactive</span>  </a>");
+              }else if (resp['status']==1){
+                $("#option-"+option_id).html("<a class='updateOptionStatus' href ='javascript::void(0)'> <span class='badge  badge-success'>Active</span> </a>");
+
+
+              }
+                   
+            },error:function(){
+                alert("Error");
+            }
+        });
+
+    });
     // Update Section Status
     $(" .updateSectionStatus").click(function(){
         var status =$(this).text();
@@ -226,7 +249,29 @@ $(document).ready(function(){
            }
         });
    });
+   $(".updatevalueStatus").click(function(){
+      
+    var status =$(this).text();
+    var value_id=$(this).attr("value_id");
+    $.ajax({
+        type:'post',
+        url: '/admin/update-value-status',
+        data:{status:status, value_id:value_id},
+        success:function(resp){
+         
+            if (resp['status']==0){
+                $("#value-"+value_id).html("<a class='updateProductStatus' href ='javascript::void(0)'> <span class='badge badge-danger'>Inactive </span></a>");
+            }else if (resp['status']==1){
+              $("#value-"+value_id).html("<a class='updateProductStatus' href ='javascript::void(0)'><span class='badge badge-success'> Active </span> </a>");
 
+
+            }
+              
+        },error:function(){
+            alert("Error");
+       }
+    });
+});
    $(" .updateImageStatus").click(function(){
     var status =$(this).text();
     var image_id=$(this).attr("image_id");
@@ -248,4 +293,54 @@ $(document).ready(function(){
             alert("Error");
        }
     });
+    
 });
+var values=[];
+var options=[];
+$('input[type="checkbox"]').change(function() {
+    var text=$(this).next().text();
+    var value=$(this).val();
+    var option=$(this).attr('option-id');
+    var dataid=$(this).attr('data-id');
+    if(options.indexOf(option) == -1){
+        options.push(option);  
+        console.log("options")
+        console.log(options)
+    }
+    
+   
+       
+    if ($('input[option-id='+option+']:checked').length == 0) {
+        options =$.grep(options, function(op) {
+            return op != option;
+          });
+    }
+    
+    if ($(this).is(':checked')) {
+    values.push(value);
+    $('#text-values').append('<span class="tag label label-info">'+text+'<span class="remove" data-id="'+value+'" data-role="remove"></span></span>');
+    }
+    else{
+            $("span[data-id="+value+"]").parent().remove();
+            values =$.grep(values, function(value) {
+                return value != dataid;
+              });
+              console.log("values")
+              console.log(values)
+    }
+    $("#options").val(options);
+    $("#values").val(values);
+});
+$('.mb-30').on('click','.remove',function() {
+    $(this).parent().remove();
+    var dataid=$(this).attr('data-id');
+    $("input[value="+dataid+"]").prop('checked', false)
+    values =$.grep(values, function(value) {
+        return value != dataid;
+      });
+      $("#values").val(values);
+});
+  
+
+
+

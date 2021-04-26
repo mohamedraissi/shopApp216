@@ -88,13 +88,13 @@
 											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
 												<a class="dropdown-item" href="{{url('admin/add-edit-product/'.$product->id) }}"><i class="dw dw-edit2"></i> Edit</a>
-
+												<a class="dropdown-item" href="{{ url('admin/add-options/'.$product->id) }}"><i class="icon-copy dw dw-add"></i> add option</a>
+												<a class="dropdown-item" href="{{ url('admin/add-attributes/'.$product->id) }}"><i class="icon-copy dw dw-add"></i> add</a>
+												<a class="dropdown-item" href="{{ url('admin/add-images/'.$product->id) }}"><i class="icon-copy dw dw-add"></i> Image</a>
 												<a   href="javascript:void(0)" class ="confirmDelete dropdown-item"    record="{{$product->product_name}}" recordid="{{$product->id }}" 
 												<?php /* href="{{url('admin/delete-product/'.$product->id) }}" */ ?>>
 												 <i class="dw dw-delete-2"></i> Delete</a>
 												 
-												<a class="dropdown-item" href="{{ url('admin/add-attributes/'.$product->id) }}"><i class="icon-copy dw dw-add"></i> add</a>
-												<a class="dropdown-item" href="{{ url('admin/add-images/'.$product->id) }}"><i class="icon-copy dw dw-add"></i> Image</a>
 											</div>
 										</div>
 									</td>

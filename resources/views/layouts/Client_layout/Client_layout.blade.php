@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="description" content="Fashi Template">
     <meta name="keywords" content="Fashi, unica, creative, html">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Fashi | Template</title>
@@ -55,6 +56,7 @@
         <script src="{{ url('front/js/jquery.slicknav.js')}}">></script>
         <script src="{{ url('front/js/owl.carousel.min.js')}}">></script>
         <script src="{{ url('front/js/main.js')}}">> </script>
+        <script src="{{ url('js/front_js/front_script.js')}}">> </script>
 
 </body>
 </html>

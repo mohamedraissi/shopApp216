@@ -131,6 +131,13 @@
 						 	@php $active=""; @endphp
 						 @endif
 							<li><a href="{{url('admin/banners')}}" class="{{$active}}">Banners</a></li>
+
+							@if (Session::get('page')=="options")
+						 	@php $active="active"; @endphp
+						 @else
+						 	@php $active=""; @endphp
+						 @endif
+							<li><a href="{{url('admin/options')}}" class="{{$active}}">Options</a></li>
 						</ul>
 					</li>
 					

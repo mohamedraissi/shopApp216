@@ -4310,3 +4310,10 @@ ol {
 		padding-right: 15px;
 	}
 }
+.page-item.active .page-link{
+	background-color: #e7ab3c;
+    border-color: #e7ab3c;
+}
+
+
+}

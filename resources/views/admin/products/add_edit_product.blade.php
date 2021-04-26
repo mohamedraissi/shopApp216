@@ -89,11 +89,14 @@
 						</div>
 
                         <div class="form-group col-md-6 col-sm-12">
-							<label class="col-sm-12  col-form-label">product code</label>
+							<label class="col-sm-12  col-form-label">select brand</label>
 							<div class="col-sm-12 col-md-12">
-                            <input  type="text" class="form-control" name="product_code" id="product_code" placeholder="Enter product Code" 
-								@if (!empty ($productdata['product_code'] )) value="{{$productdata['product_code']}}" @else value="{{old ('product_code') }}" @endif>
-								
+								<select name="brand" id="" class="custom-select2 form-control select2-hidden-accessible" style ="width:100%;">
+								<option value="">select brand</option>	
+								@foreach($brands as $brand)
+									<option value="{{$brand->id}}">{{$brand->name}}</option>
+								@endforeach
+								</select>
 							</div>
 						</div>
                        
@@ -105,14 +108,27 @@
 								@if (!empty ($productdata['product_price'] )) value="{{$productdata['product_price']}}" @else value="{{old ('product_price') }}" @endif>
 							</div>
 						</div>
-                        <div class="form-group col-md-6 col-sm-12">
-							<label class="col-sm-12  col-form-label">Product Discount %</label>
-							<div class="col-sm-12 col-md-12">
-								<input  type="text" class="form-control"  id="product_discount" name="product_discount" placeholder="Enter product Discount" 
-								@if (!empty ($productdata['product_discount'] )) value="{{$productdata['product_discount']}}" @else value="{{old ('product_discount') }}" @endif>
+                        
+						<div class="form-group col-md-6 col-sm-12">
+							<label for="exampleInputFile" class="col-sm-12  col-form-label">product  video</label>
+							<div class="col-sm-12 col-md-12"> 
+								<div class="custom-file ">
+									<input type="file" class="custom-file-input form-control" id="product_video" name="product_video">
+									<label for="product_video" class="custom-file-label col-sm-12  col-form-label">Choose file</label>
+								</div>
+								
+							    @if(!empty($productdata['product_video']))
+							       <div><a href="{{ url('videos/product_videos/'.$productdata['product_video']) }}" download>Download</a>
+							      &nbsp;|&nbsp;
+							     <a class="confirmDelete ml-4"  href="javascript:void(0)" record="product-video" recordid="{{$productdata['id'] }}">  Delete Video </a>
+							     </div>
+							    @endif 
+								
+
+								
 							</div>
+							   
 						</div>
-						
 						
 						<div class="form-group col-md-6 col-sm-12">
 							<label for="exampleInputFile" class="col-sm-12  col-form-label">product Main Image</label>
@@ -132,25 +148,19 @@
 							</div>
 							   
 						</div>
-                        <div class="form-group col-md-6 col-sm-12">
-							<label for="exampleInputFile" class="col-sm-12  col-form-label">product  video</label>
-							<div class="col-sm-12 col-md-12"> 
-								<div class="custom-file ">
-									<input type="file" class="custom-file-input form-control" id="product_video" name="product_video">
-									<label for="product_video" class="custom-file-label col-sm-12  col-form-label">Choose file</label>
-								</div>
-								
-							    @if(!empty($productdata['product_video']))
-							       <div><a href="{{ url('videos/product_videos/'.$productdata['product_video']) }}" download>Download</a>
-							      &nbsp;|&nbsp;
-							     <a class="confirmDelete ml-4"  href="javascript:void(0)" record="product-video" recordid="{{$productdata['id'] }}">  Delete Video </a>
-							     </div>
-							    @endif 
-								
 
+                        <div class="form-group col-md-6 col-sm-12">
+							<label class="col-sm-12  col-form-label">product code</label>
+							<div class="col-sm-12 col-md-12">
+                            <input  type="text" class="form-control" name="product_code" id="product_code" placeholder="Enter product Code" 
+								@if (!empty ($productdata['product_code'] )) value="{{$productdata['product_code']}}" @else value="{{old ('product_code') }}" @endif>
 								
 							</div>
-							   
+							<label class="col-sm-12  col-form-label">Product Discount %</label>
+							<div class="col-sm-12 col-md-12">
+								<input  type="text" class="form-control"  id="product_discount" name="product_discount" placeholder="Enter product Discount" 
+								@if (!empty ($productdata['product_discount'] )) value="{{$productdata['product_discount']}}" @else value="{{old ('product_discount') }}" @endif>
+							</div>
 						</div>
 						
 

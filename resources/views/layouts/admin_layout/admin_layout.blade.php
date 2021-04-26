@@ -16,6 +16,7 @@
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="{{ url('assets/src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url('assets/vendors/styles/core.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url('assets/vendors/styles/icon-font.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url ('assets/src/plugins/datatables/css/dataTables.bootstrap4.min.css') }}">"
@@ -56,7 +57,9 @@
 	<script src="{{ asset('assets/src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
 	<script src="{{ asset('assets/src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
 	<script src="{{ asset('assets/vendors/scripts/dashboard.js') }}"></script>
-    
+    <!-- bootstrap-tagsinput js -->
+	<script src="{{ asset('assets/src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-tagsinput/1.3.6/jquery.tagsinput.min.js"></script>
 	<script src="{{ asset('js/app.js') }}"></script>
 	<script src="{{ asset('js/admin_js/admin_scripts.js') }}"></script>
 	<!--SweetAlert Script -->

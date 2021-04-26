@@ -7,11 +7,15 @@ use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\OptionController;
+use App\Http\Controllers\Admin\OptionValuesController;
 use App\Http\Controllers\Admin\BannersController;
 use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\Front\ProductsController as ProductFront;
 
-
+use App\Models\OptionValues;
+use App\Models\Option;
+use App\Models\Product;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,12 +26,10 @@ use App\Http\Controllers\Front\ProductsController as ProductFront;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Models\Category;
 
 Route::get('/', function () {
     return view('welcome');
-});
-Route::get('hhh', function(){
-  return view ('layouts.admin_layout.hhh');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -89,6 +91,16 @@ Route::prefix('/admin')->namespace('Admin')->group(function(){
   Route::match(['get','post'],'add-images/{id}', [ProductsController::class,'addImages']);
   Route::post('update-image-status', [ProductsController::class,'updateImageStatus'] );
   Route::get('delete-image/{id}', [ProductsController::class,'deleteImage'] );
+  //add option in product
+  Route::match(['get','post'],'add-options/{id}',[ProductsController::class, 'addOptions']);
+  //Option
+  Route::get ('options',[OptionController::class,'options']);
+  Route::post('update-option-status', [OptionController::class,'updateOptionStatus'] );
+  Route::match(['get','post'], 'add-edit-option/{id?}',[OptionController::class,'addEditOption']);
+  Route::get('delete-option/{id}' , [OptionController::class, 'deleteOption']);
+  Route::match(['get','post'],'add-value/{id}' , [OptionController::class,'addValues']);
+  Route::post('edit-value/{id}',[OptionController::class, 'editValues']);
+  Route::post('update-value-status', [OptionController::class,'updateValueStatus'] );
   });
   
 });
@@ -100,7 +112,20 @@ Route::get('contact', [ClientController::class,'contact']);
 Route::get('blog-details', [ClientController::class,'blogd']);
 Route::get('checkout', [ClientController::class,'check']);
 Route::get('shopping-cart', [ClientController::class,'shopcart']);
-Route::namespace('Front')->group(function(){
+Route::namespace('front')->group(function(){
   //Route::get('/',IndexController::class,'index');
-  Route::get('/{url}',[ProductFront::class,'listing']);
+  //Route::get('/{url}',[ProductFront::class,'listing']);
+   //listing categories route
+  $catUrls = Category::select('url')->where('status',1)->get()->pluck("url")->toArray();
+  foreach ($catUrls as $key => $url) {
+    Route::get('/'.$url,[ProductFront::class,'listing']);
+  }
+ //shopping cart route
+ Route::get('/cart',[ProductFront::class,'cart']);
+ //product detail route
+ Route::get('/product/{id}',[ProductFront::class,'detail']);
+ //get product attribute price
+ Route::post('/get-product-price',[ProductFront::class,'getProductPrice']);
+ //add to carts route
+ Route::post('/add-to-cart',[ProductFront::class,'addtocart']);
 });
