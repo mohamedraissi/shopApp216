@@ -2,7 +2,7 @@
   <?php
   use App\Models\Section;
   $sections =Section::sections();
-  //echo"<pre>";print_r($sections);die;
+  
   ?>
   <header class="header-section">
     <div class="header-top">
@@ -18,7 +18,13 @@
                 </div>
             </div>
             <div class="ht-right">
-                <a href="#" class="login-panel"><i class="fa fa-user"></i>Login</a>
+            @if(Auth::check())
+                <a href="{{ url('account') }}" class="login-panel"><i class="fa fa-user"></i>My Account</a>
+                <a href="{{ url('logout') }}" class="login-panel"><i class="fa fa-user"></i>Logout</a>
+                @else
+                <a href="{{ url('Login') }}" class="login-panel"><i class="fa fa-user"></i>Login</a>
+                <a href="{{ url('Register') }}" class="login-panel"><i class="fa fa-user"></i>Register</a>
+                @endif
                 <div class="lan-selector">
                     <select class="language_drop" name="countries" id="countries" style="width:300px;">
                         <option value='yt' data-image={{ asset("front/img/flag-1.jpg") }} data-imagecss="flag yt"

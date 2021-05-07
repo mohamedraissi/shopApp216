@@ -4268,6 +4268,10 @@ ol {
 	.blog-details-inner .blog-post .next-blog .nb-pic i {
 		display: none;
 	}
+	form.cmxform label.error, label.error {
+		color: red;
+		font-style: italic;
+	}
 	.blog-details-inner .blog-post .prev-blog .pb-pic i {
 		display: none;
 	}

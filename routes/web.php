@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\OptionValuesController;
 use App\Http\Controllers\Admin\BannersController;
 use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\Front\ProductsController as ProductFront;
+use App\Http\Controllers\Front\ UsersController;
 
 use App\Models\OptionValues;
 use App\Models\Option;
@@ -128,4 +129,32 @@ Route::namespace('front')->group(function(){
  Route::post('/get-product-price',[ProductFront::class,'getProductPrice']);
  //add to carts route
  Route::post('/add-to-cart',[ProductFront::class,'addtocart']);
+
+ // Update cart Item quantity
+ Route::post('/update-cart-item-qty',[ProductFront::class,'updatetoCartItemQty']);
+
+ // Delete cart Item 
+ Route::post('/delete-cart-item',[ProductFront::class,'DeleteCartItem']);
+
+ // Login and register
+ Route::get('/Login', [UsersController::class,'Login']);
+ Route::get('/Register', [UsersController::class,'Register']);
+
+ Route::post('/Log-in',[UsersController::class ,'LoginUser']);
+ Route::post('/Registered',[UsersController::class ,'RegisterUser']);
+
+
+ // CHECK EMAIL
+
+ Route::match(['get','post'],'/check-email',[UsersController::class, 'checkEmail']);
+
+ // LOGOUT USER
+ Route::get('/logout',[UsersController::class ,'logoutUser']);
+
+// CONFIRMATION 
+
+Route::match(['get','post'],'/confirm/{code}',[UsersController::class, 'confirmAccount']);
+
+Route::match(['get','post'],'/forgot_password',[UsersController::class, 'forgotPassword']);
+
 });

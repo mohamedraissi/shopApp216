@@ -128,7 +128,7 @@
                <input type="hidden" name="product_id" value="{{ $productDetails['id'] }}">
                <div>
                  <div class="mt-1">
-                   <h4 class="getAttrPrice">{{ $productDetails['product_price'] }}</h4>
+                   <h4 class="getAttrPrice">{{ $productDetails['product_price'] }}$</h4>
                      
                      <select class="span2 pull-left" name="size" id="getPrice" product-id="{{ $productDetails['id'] }}" required="" >
                        <option value=""> Select Size </option>

@@ -25,6 +25,12 @@
     <link rel="stylesheet" href={{ asset("front/css/jquery-ui.min.css") }} type="text/css">
     <link rel="stylesheet" href={{ asset("front/css/slicknav.min.css") }} type="text/css">
     <link rel="stylesheet" href={{ asset("front/css/style.css") }} type="text/css">
+    <style>
+form.cmxform label.error, label.error {
+    background-color: #e7ab3c;
+    font-style: italic;
+}
+    </style>
    
 </head>
 <body>
@@ -35,9 +41,7 @@
     
     
     @include('layouts.Client_layout.Client_Header') 
-
-    
-   
+        
 
     <div class="mobile-menu-overlay"></div>
          @yield('content')
@@ -49,6 +53,7 @@
         <script src="{{ url('front/js/jquery-3.3.1.min.js')}}"></script>
         <script src="{{ url('front/js/bootstrap.min.js')}}">></script>
         <script src="{{ url('front/js/jquery-ui.min.js')}}">></script>
+        <script src="{{ url('front/js/jquery.validate.js')}}">></script>
         <script src="{{ url('front/js/jquery.countdown.min.js')}}">></script>
         <script src="{{ url('front/js/jquery.nice-select.min.js')}}">></script>
         <script src="{{ url('front/js/jquery.zoom.min.js')}}">></script>
