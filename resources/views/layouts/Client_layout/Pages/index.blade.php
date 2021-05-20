@@ -43,9 +43,9 @@
             </div>
         </div>
     </div>
-    <!-- Banner Section End -->
+    <!-- banner Section End -->
     
-    <!-- Women Banner Section Begin -->
+    <!-- Women banner Section Begin -->
     <section class="women-banner spad">
         <div class="container-fluid">
             <div class="row">
@@ -160,7 +160,7 @@
             </div>
         </div>
     </section>
-    <!-- Women Banner Section End -->
+    <!-- Women banner Section End -->
 
     <!-- Deal Of The Week Section Begin-->
     <section class="deal-of-week set-bg spad" data-setbg={{ asset("front/img/time-bg.jpg") }}
@@ -199,7 +199,7 @@
     </section>
     <!-- Deal Of The Week Section End -->
 
-    <!-- Man Banner Section Begin -->
+    <!-- Man banner Section Begin -->
     <section class="man-banner spad">
         <div class="container-fluid">
             <div class="row">
@@ -314,7 +314,7 @@
             </div>
         </div>
     </section>
-    <!-- Man Banner Section End -->
+    <!-- Man banner Section End -->
 
     <!-- Instagram Section Begin -->
     <div class="instagram-photo">

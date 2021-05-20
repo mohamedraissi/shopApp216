@@ -78,7 +78,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="checkout-content">
-                        <input type="text" placeholder="Enter Your Coupon Code">
+                        <input type="text" placeholder="Enter Your coupon Code">
                     </div>
                     <div class="place-order">
                         <h4>Your Order</h4>

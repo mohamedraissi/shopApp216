@@ -18,7 +18,7 @@
 2.  Helper Css
 3.  Header Section
 4.  Hero Section
-5.  Banner Section
+5.  coupon Section
 6.  Deal Of The Week
 7.  Latest Blog
 8.  Logo Carousel
@@ -962,25 +962,25 @@ ol {
 }
 
 /*---------------------
-  Banner Section
+  coupon Section
 -----------------------*/
 
-.banner-section {
+.coupon-section {
 	padding: 80px 50px;
 }
 
-.single-banner {
+.single-coupon {
 	position: relative;
 	z-index: 1;
 }
 
-.single-banner:hover::before {
+.single-coupon:hover::before {
 	-webkit-transform: scale(1);
 	-ms-transform: scale(1);
 	transform: scale(1);
 }
 
-.single-banner::before {
+.single-coupon::before {
 	position: absolute;
 	left: 35px;
 	top: 30px;
@@ -997,11 +997,11 @@ ol {
 	transition: all 0.3s;
 }
 
-.single-banner img {
+.single-coupon img {
 	min-width: 100%;
 }
 
-.single-banner .inner-text {
+.single-coupon .inner-text {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -1018,7 +1018,7 @@ ol {
 	height: 100%;
 }
 
-.single-banner .inner-text h4 {
+.single-coupon .inner-text h4 {
 	color: #252525;
 	font-weight: 700;
 	padding: 11px 28px;
@@ -1027,10 +1027,10 @@ ol {
 }
 
 /*---------------------
-  Women Banner Section
+  Women coupon Section
 -----------------------*/
 
-.women-banner {
+.women-coupon {
 	padding-right: 65px;
 	padding-left: 65px;
 	padding-top: 0;
@@ -1310,10 +1310,10 @@ ol {
 }
 
 /*---------------------
-  Man Banner
+  Man coupon
 -----------------------*/
 
-.man-banner {
+.man-coupon {
 	padding-right: 65px;
 	padding-left: 65px;
 	padding-top: 80px;
@@ -3946,13 +3946,13 @@ ol {
 }
 
 @media only screen and (max-width: 991px) {
-	.banner-section {
+	.coupon-section {
 		padding: 80px 0 50px;
 	}
-	.single-banner {
+	.single-coupon {
 		margin-bottom: 30px;
 	}
-	.women-banner {
+	.women-coupon {
 		padding-right: 0;
 		padding-left: 0;
 	}
@@ -3967,7 +3967,7 @@ ol {
 	.product-slider .owl-nav button[type=button] {
 		display: none;
 	}
-	.man-banner {
+	.man-coupon {
 		padding-right: 0;
 		padding-left: 0;
 	}

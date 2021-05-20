@@ -25,8 +25,8 @@ class BannersController extends Controller
            else{
                $status =1;
            }
-           Banner::where('id', $data ['banner_id'])->update(['status'=>$status]);
-           return response ()->json(['status'=>$status,'banner_id'=>$data ['banner_id']]);
+           Banner::where('id', $data['banner_id'])->update(['status'=>$status]);
+           return response ()->json(['status'=>$status,'banner_id'=>$data['banner_id']]);
         }
     }
     public function deleteBanner($id){

@@ -1,10 +1,10 @@
 <?php use App\Models\Banner; 
-$getBanners = Banner::getBanners();
+$getbanners = Banner::getbanners();
 
 ?>
 <section class="hero-section">
         <div class="hero-items owl-carousel">
-            @foreach($getBanners as $key => $banner)
+            @foreach($getbanners as $key => $banner)
             <div class="single-hero-items set-bg @if ($key==0) active @endif" data-setbg= {{ asset("images/banners_images/".$banner['banner_image']) }}>
                 <div class="container">
                     <div class="row">

@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\BannersController;
 use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\Front\ProductsController as ProductFront;
 use App\Http\Controllers\Front\ UsersController;
+use App\Http\Controllers\Admin\CouponController;
 
 use App\Models\OptionValues;
 use App\Models\Option;
@@ -39,7 +40,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::prefix('/admin')->namespace('Admin')->group(function(){
 
-  //#Rim
 
   //all the admin routes will be define here 
   Route::match(['get','post'],'/', [AdminController::class,'login']);
@@ -52,8 +52,8 @@ Route::prefix('/admin')->namespace('Admin')->group(function(){
   Route::match(['get','post'], 'update-admin-details', [AdminController::class,'updateAdminDetails']);
   Route::match(['post','get'], 'add-subadmin', [AdminController::class,'addSubAdmin']);
   Route::post('add-subadmin', [AdminController::class,'addSubAdmin']); 
+    
 
-  //#Nour
 
   //section
  Route::get('sections',[SectionController::class,'sections']);
@@ -73,10 +73,10 @@ Route::prefix('/admin')->namespace('Admin')->group(function(){
  Route::post('update-brand-status', [BrandController::class,'updateBrandStatus'] );
  Route::match(['get','post'], 'add-edit-brand/{id?}',[BrandController::class,'addEditBrand']);
  Route::get('delete-brand/{id}' , [BrandController::class, 'deleteBrand']);
-//Banners 
+//banners 
   Route::match(['get','post'],'add-edit-banner/{id?}',[BannersController::class,'addeditBanner'] );
   Route::get('banners',[BannersController::class,'banners']);
-  Route::post('update-banner-status', [BannersController::class,'updateBannerStatus'] );
+  Route::post('update-banner-status', [BannersController::class,'updateBannerstatus'] );
   Route::get('delete-banner/{id}', [BannersController::class,'deleteBanner'] );
  //product
   Route::get('products', [ProductsController::class,'products']);
@@ -102,6 +102,11 @@ Route::prefix('/admin')->namespace('Admin')->group(function(){
   Route::match(['get','post'],'add-value/{id}' , [OptionController::class,'addValues']);
   Route::post('edit-value/{id}',[OptionController::class, 'editValues']);
   Route::post('update-value-status', [OptionController::class,'updateValueStatus'] );
+  //coupons
+  Route::get('coupons', [CouponController::class,'coupons'] );
+  Route::post('update-coupon-status', [CouponController::class,'updatecouponStatus'] );
+  Route::match(['get','post'],'add-edit-coupon/{id?}',[CouponController::class,'addeditCoupon'] );
+  Route::get('delete-coupon/{id}' , [CouponController::class, 'deleteCoupon']);
   });
   
 });
@@ -137,7 +142,7 @@ Route::namespace('front')->group(function(){
  Route::post('/delete-cart-item',[ProductFront::class,'DeleteCartItem']);
 
  // Login and register
- Route::get('/Login', [UsersController::class,'Login']);
+ Route::get('/Login',[UsersController::class,'Login']);
  Route::get('/Register', [UsersController::class,'Register']);
 
  Route::post('/Log-in',[UsersController::class ,'LoginUser']);
@@ -156,5 +161,15 @@ Route::namespace('front')->group(function(){
 Route::match(['get','post'],'/confirm/{code}',[UsersController::class, 'confirmAccount']);
 
 Route::match(['get','post'],'/forgot_password',[UsersController::class, 'forgotPassword']);
+Route::group(['middleware'=>['auth']],function(){
 
+// Users account profile
+Route::match(['get','post'],'/account',[UsersController::class, 'account']);
+
+Route::post('/check-user-pwd',[UsersController::class ,'chkUserPassword']);
+
+Route::post('/update-user-pwd',[UsersController::class ,'updateUserPassword']);
+
+Route::post('/apply-coupon',[ProductFront::class ,'applyCoupon']);
+  });
 });

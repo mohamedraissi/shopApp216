@@ -340,6 +340,38 @@ $('.mb-30').on('click','.remove',function() {
       });
       $("#values").val(values);
 });
+
+$(" .updatecouponStatus").click(function(){
+    var status =$(this).text();
+    var coupon_id=$(this).attr("coupon_id");
+    $.ajax({
+        type:'post',
+        url: '/admin/update-coupon-status',
+        data:{status:status, coupon_id:coupon_id},
+        success:function(resp){
+          
+          if (resp['status']==0){
+              $("#coupon-"+coupon_id).html("<a class='updatecouponStatus' href ='javascript::void(0)'> <span class='badge badge-danger'>Inactive </span></a>");
+          }else if (resp['status']==1){
+            $("#coupon-"+coupon_id).html("<a class='updatecouponStatus' href ='javascript::void(0)'><span class='badge badge-success'> Active </span> </a>");
+
+          }
+               
+        },error:function(){
+            alert("Error");
+        }
+    });
+   
+   
+      $("#ManualCoupon").click(function(){
+        $("#couponField").show();
+    });
+ 
+    $("#AutomaticCoupon").click(function(){
+     $("#couponField").hide();
+ });
+      
+});
   
 
 

@@ -24,6 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ url('assets/vendors/styles/style.css') }}">
 	@yield('css')
 	<!-- Global site tag (gtag.js) - Google Analytics -->
+	
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
@@ -47,24 +48,27 @@
 	@yield('content')
 	
 	<!-- js -->
+	<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 	<script src="{{ asset('assets/vendors/scripts/core.js') }}"></script>
 	<script src="{{ asset('assets/vendors/scripts/script.min.js') }}"></script>
 	<script src="{{ asset('assets/vendors/scripts/process.js') }}"></script>
 	<script src="{{ asset('assets/vendors/scripts/layout-settings.js') }}"></script>
-	@yield('apexcharts')
+	
 	<script src="{{ asset('assets/src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ asset('assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
 	<script src="{{ asset('assets/src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
 	<script src="{{ asset('assets/src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
-	<script src="{{ asset('assets/vendors/scripts/dashboard.js') }}"></script>
+	
     <!-- bootstrap-tagsinput js -->
 	<script src="{{ asset('assets/src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-tagsinput/1.3.6/jquery.tagsinput.min.js"></script>
 	<script src="{{ asset('js/app.js') }}"></script>
-	<script src="{{ asset('js/admin_js/admin_scripts.js') }}"></script>
+	<script src="{{ asset('js/admin_js/admin_scripts.js')}}"></script>
+	
 	<!--SweetAlert Script -->
 	<script src=" https://cdn.jsdelivr.net/npm/sweetalert2@9 "></script>
 
-	@yield('js')
+	
+	
 </body>
 </html>

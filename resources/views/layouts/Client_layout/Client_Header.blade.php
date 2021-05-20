@@ -1,7 +1,8 @@
 
   <?php
-  use App\Models\Section;
-  $sections =Section::sections();
+use App\Models\Product; 
+use App\Models\Section;
+$sections =Section::sections();
   
   ?>
   <header class="header-section">
@@ -70,10 +71,11 @@
                             </a>
                         </li>
                         <li class="cart-icon">
-                            <a href="#">
+                            <a href="{{ url('cart') }}">
                                 <i class="icon_bag_alt"></i>
-                                <span>3</span>
+                                <span class="totalCartItems">{{totalCartItems()}}</span>
                             </a>
+                            
                             <div class="cart-hover">
                                 <div class="select-items">
                                     <table>
@@ -133,9 +135,9 @@
                     <li><a href="#">{{$section['name']}}</a>
                         <ul class="dropdown">
                             @foreach($section['categories'] as $category)
-                                <li><a href="#">{{$category['category_name']}}</a></li>
+                                <li><a href="{{url($category['url'])}}">{{$category['category_name']}}</a></li>
                                     @foreach($category['subcategories'] as $subcategory)
-                                    <li><a href="#" class="font-weight-normal pt-0 pl-5">{{$subcategory['category_name']}}</a></li>
+                                    <li><a href="{{url($subcategory['url'])}}" class="font-weight-normal pt-0 pl-5">{{$subcategory['category_name']}}</a></li>
                                     @endforeach
                                     @if(count($section['categories'])>1)
                                         <hr class="mt-0"  style="border-top: 1px solid rgb(255 255 255 / 10%);margin-left:20px;margin-right:20px;"> 

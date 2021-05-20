@@ -95,6 +95,7 @@ $(document).on('click','.qtybtn',function(){
         if(resp.status==false){
           alert ('Product Size is not avaibale !');
         }
+        $(".totalCartItems").html(resp.totalCartItems);
         $("#AppendCartItems").html(resp.view);
 
       },error:function(){
@@ -107,12 +108,13 @@ $(document).on('click','.qtybtn',function(){
 $(document).on('click','.btnItemDelete',function(){
   
   var cartid = $(this).data('cartid');
-  var resutl = confirm("You want to delete this Cart Item ? ");
+  var result = confirm("You want to delete this Cart Item ? ");
   if (result){$.ajax({
     data:{"cartid":cartid},
     url:'/delete-cart-item',
     type:'post',
     success:function(resp){
+      $(".totalCartItems").html(resp.totalCartItems);
       $("#AppendCartItems").html(resp.view)
     },error:function(){
       alert("error");
@@ -130,8 +132,8 @@ $(document).on('click','.btnItemDelete',function(){
       name: "required",
       mobile: {
         required: true,
-        minlength: 11,
-        maxlength: 12,
+        minlength: 8,
+        maxlength: 8,
         digits: true,
       },
       email: {
@@ -153,7 +155,7 @@ $(document).on('click','.btnItemDelete',function(){
       name: "Please enter your firstname",
       mobile: {
         required: "Please enter your phone number",
-        minlength: "Your username must consist of at least 11 characters",
+        minlength: "Your username must consist of at least 8 characters",
         digits: "Please enter your valid number",
       },
       password: {
@@ -184,10 +186,114 @@ $(document).on('click','.btnItemDelete',function(){
     },
     messages: {
        email:{
-        required: "Please enter your Email",
+        required: "Please Enter your Email",
        },
       password: {
         required: "Please Enter your Password",
       }
     }
   });
+
+
+  $("#accountForm").validate({
+    rules: {
+      name: {
+        required: true,
+        accept: "[a-zA-Z]+"
+      },
+      mobile: {
+        required: true,
+        minlength: 8,
+        maxlength: 8,
+        digits: true,
+      },
+    },
+    messages: {
+      name: "Please enter your firstname",
+      accept: "Please enter valid name",
+      mobile: {
+        required: "Please enter your phone number",
+        minlength: "Your username must consist of at least 8 characters",
+        digits: "Please enter your valid number",
+      },
+    }
+
+
+
+
+  });
+
+  // CHECK CURRENT USER PASSWORD
+
+  $("#current_pwd").keyup(function(){
+    var current_pwd = $(this).val();
+    $.ajax({
+      type:'post',
+      url:'/check-user-pwd',
+      data:{current_pwd:current_pwd},
+      success:function(resp){
+       
+        if(resp=="false"){
+          $("#chkpassword").html("<font color='red'>Current Password is Incorrect </font>");
+        }else if (resp =="true"){
+          $("#chkpassword").html("<font color='green'>Current Password Correct </font>");
+        }
+      },error:function(){
+        alert("Error");
+      }
+    });
+  });
+  $("#passwordForm").validate({
+    rules: {
+      current_pwd: {
+        required: true,
+        minlength: 6,
+      },
+      new_pwd:{
+        required: true,
+        minlength: 6,
+      },
+      confirm_pwd:{
+        required: true,
+        minlength: 6,
+        equalTo:"#new_pwd"
+      },
+    },
+    messages: {
+      name: "Please enter your firstname",
+      accept: "Please enter valid name",
+      mobile: {
+        required: "Please enter your phone number",
+        minlength: "Your username must consist of at least 8 characters",
+        digits: "Please enter your valid number",
+      },
+    }
+  });
+// APPLY DISCOUNT CODE
+$("#ApplyCoupon").submit(function(){
+  var user = $(this).attr("user");
+  if(user==1){
+
+  }else {
+    alert("Please login to apply Discount code!");
+    return false;
+  }
+  var code = $("#code").val();
+  
+  $.ajax({
+  type:'post',
+  data:{code:code},
+  url:'/apply-coupon',
+  success:function(resp){
+    if(resp.message!=""){
+      alert(resp.message);
+    }
+    $(".totalCartItems").html(resp.totalCartItems);
+        $("#AppendCartItems").html(resp.view);
+  },error:function(){
+    alert("Error");
+  }
+})
+
+});
+  

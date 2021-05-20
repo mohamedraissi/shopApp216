@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\models\Banner;
+use App\models\coupon;
 
-class BannersTableSeeder extends Seeder
+class couponsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,12 +14,12 @@ class BannersTableSeeder extends Seeder
      */
     public function run()
     {
-        $bannerRecords = [
+        $couponRecords = [
 
-            ['id' => 1, 'banner_image' => 'banner1.jpg', 'link' => '' ,'title' => 'kid','alt' => 'kid','status' => 1],
-            ['id' => 2, 'banner_image' => 'banner2.jpg', 'link' => '' ,'title' => 'women','alt' => 'women','status' => 1]
+            ['id' => 1, 'coupon_image' => 'coupon1.jpg', 'link' => '' ,'title' => 'kid','alt' => 'kid','status' => 1],
+            ['id' => 2, 'coupon_image' => 'coupon2.jpg', 'link' => '' ,'title' => 'women','alt' => 'women','status' => 1]
             
         ];
-        Banner::insert($bannerRecords);
+        coupon::insert($couponRecords);
     }
 }

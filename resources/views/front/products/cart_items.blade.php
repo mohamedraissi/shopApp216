@@ -53,8 +53,9 @@
                             </div>
                             <div class="discount-coupon">
                                 <h6>Discount Codes</h6>
-                                <form action="#" class="coupon-form">
-                                    <input type="text" placeholder="Enter your codes">
+                                <form id="ApplyCoupon" method="post" action="javascript:void(0);" class="coupon-form" @if(Auth::check()) user="1" @endif>
+                                    @csrf
+                                    <input name="code" id="code" type="text" placeholder="Enter Discount CODE" required="">
                                     <button type="submit" class="site-btn coupon-btn">Apply</button>
                                 </form>
                             </div>

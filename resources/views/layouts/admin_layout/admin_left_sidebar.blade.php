@@ -130,7 +130,14 @@
 						 @else
 						 	@php $active=""; @endphp
 						 @endif
-							<li><a href="{{url('admin/banners')}}" class="{{$active}}">Banners</a></li>
+							<li><a href="{{url('admin/banners')}}" class="{{$active}}">banners</a></li>
+
+							@if (Session::get('page')=="coupons")
+						 	@php $active="active"; @endphp
+						 @else
+						 	@php $active=""; @endphp
+						 @endif
+							<li><a href="{{url('admin/coupons')}}" class="{{$active}}">coupons</a></li>
 
 							@if (Session::get('page')=="options")
 						 	@php $active="active"; @endphp

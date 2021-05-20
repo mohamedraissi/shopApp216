@@ -59,25 +59,25 @@
 						<div class="row">
 
 						<div class="form-group col-md-6 col-sm-12">
-							<label class="col-sm-12  col-form-label">Banner title</label>
+							<label class="col-sm-12  col-form-label">banner title</label>
 							<div class="col-sm-12 col-md-12">
-								<input  type="text" class="form-control" name="title" id="title" placeholder="Enter Banner Title" 
+								<input  type="text" class="form-control" name="title" id="title" placeholder="Enter banner Title" 
 								@if (!empty ($banner['title'] )) value="{{$banner['title']}}" @else value="{{old ('title') }}" @endif>
 							</div>
 						</div>
  
 						<div class="form-group col-md-6 col-sm-12">
-							<label class="col-sm-12  col-form-label">Banner Link</label>
+							<label class="col-sm-12  col-form-label">banner Link</label>
 							<div class="col-sm-12 col-md-12">
-								<input  type="text" class="form-control" name="link" id="link" placeholder="Enter Banner Link" 
+								<input  type="text" class="form-control" name="link" id="link" placeholder="Enter banner Link" 
 								@if (!empty ($banner['link'] )) value="{{$banner['link']}}" @else value="{{old ('link') }}" @endif>
 							</div>
 						</div>
 						
 						<div class="form-group col-md-6 col-sm-12">
-							<label class="col-sm-12  col-form-label">Banner Alternate</label>
+							<label class="col-sm-12  col-form-label">banner Alternate</label>
 							<div class="col-sm-12 col-md-12">
-								<input  type="text" class="form-control" name="alt" id="alt" placeholder="Enter Banner Alternate" 
+								<input  type="text" class="form-control" name="alt" id="alt" placeholder="Enter banner Alternate" 
 								@if (!empty ($banner['alt'] )) value="{{$banner['alt']}}" @else value="{{old ('alt') }}" @endif>
 							</div>
 						</div>
@@ -85,7 +85,7 @@
 
 
 						<div class="form-group col-md-6 col-sm-12">
-							<label for="exampleInputFile" class="col-sm-12  col-form-label">Banner Image</label>
+							<label for="exampleInputFile" class="col-sm-12  col-form-label">banner Image</label>
 							<div class="col-sm-12 col-md-12">
 							@if(empty($banner['banner_image'])) 
 								<div class="custom-file ">
