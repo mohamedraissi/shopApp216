@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatebannersTable extends Migration
+class CreateOrdersLogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreatebannersTable extends Migration
      */
     public function up()
     {
-        Schema::create('banners', function (Blueprint $table) {
+        Schema::create('orders_logs', function (Blueprint $table) {
             $table->id();
-            $table->string('banner_image');
-            $table->string('link');
-            $table->string('title');
-            $table->string('alt');
-            $table->tinyInteger('status');
+            $table->integer('order_id');
+            $table->string('order_status');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreatebannersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('banners');
+        Schema::dropIfExists('orders_logs');
     }
 }

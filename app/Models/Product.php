@@ -76,4 +76,8 @@ class Product extends Model
     }
     return array('product_price'=>$proAttrPrice['price'],'discounted_price'=>$discounted_price,'discount'=>$discount);
     }
+    public static function getProductImage($product_id){
+        $getProductImage = Product::select('main_image')->where('id',$product_id)->first()->toArray();
+        return $getProductImage['main_image'];
+    }
 }

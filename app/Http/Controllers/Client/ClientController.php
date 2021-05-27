@@ -22,9 +22,7 @@ class ClientController extends Controller
     public function blogd(){
         return view('layouts.Client_layout.Pages.blog-details');
     }
-    public function check(){
-        return view('layouts.Client_layout.Pages.checkout');
-    }
+   
     public function shopcart(){
         return view('layouts.Client_layout.Pages.shopping-cart');
     }

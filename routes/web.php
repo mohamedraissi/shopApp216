@@ -12,7 +12,9 @@ use App\Http\Controllers\Admin\OptionValuesController;
 use App\Http\Controllers\Admin\BannersController;
 use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\Front\ProductsController as ProductFront;
-use App\Http\Controllers\Front\ UsersController;
+use App\Http\Controllers\Front\UsersController;
+use App\Http\Controllers\Front\OrdersController;
+use App\Http\Controllers\Admin\OrdersController as OrdersAdmin;
 use App\Http\Controllers\Admin\CouponController;
 
 use App\Models\OptionValues;
@@ -107,6 +109,13 @@ Route::prefix('/admin')->namespace('Admin')->group(function(){
   Route::post('update-coupon-status', [CouponController::class,'updatecouponStatus'] );
   Route::match(['get','post'],'add-edit-coupon/{id?}',[CouponController::class,'addeditCoupon'] );
   Route::get('delete-coupon/{id}' , [CouponController::class, 'deleteCoupon']);
+
+    //orders 
+  Route::get('/orders',[OrdersAdmin::class, 'Orders']);
+  Route::get('/orders/{id}',[OrdersAdmin::class, 'OrderDetails']);
+  Route::post('/update-order-status',[OrdersAdmin::class, 'UpdateOrderStatus']);
+  Route::get('view-order-invoice/{id}',[OrdersAdmin::class, 'viewOrderInvoice']);
+
   });
   
 });
@@ -116,7 +125,7 @@ Route::get('shop', [ClientController::class,'shop']);
 Route::get('blog', [ClientController::class,'blog']);
 Route::get('contact', [ClientController::class,'contact']);
 Route::get('blog-details', [ClientController::class,'blogd']);
-Route::get('checkout', [ClientController::class,'check']);
+
 Route::get('shopping-cart', [ClientController::class,'shopcart']);
 Route::namespace('front')->group(function(){
   //Route::get('/',IndexController::class,'index');
@@ -172,4 +181,17 @@ Route::post('/update-user-pwd',[UsersController::class ,'updateUserPassword']);
 
 Route::post('/apply-coupon',[ProductFront::class ,'applyCoupon']);
   });
+  Route::match(['get','post'],'/checkout',[ProductFront::class, 'checkout']);
+
+  // ADD EDIT ADRESS
+  Route::match(['get','post'],'/add-edit-delivery-address/{id?}',[ProductFront::class, 'addeditdeliveryaddress']);
+  Route::get('/delete-edit-delivery-address/{id}',[ProductFront::class, 'deleteeditdeliveryaddress']);
+
+  Route::get('/thanks',[ProductFront::class, 'thanks']);
+
+
+  Route::get('/orders',[OrdersController::class, 'Order']);
+  Route::get('/orders/{id}',[OrdersController::class, 'OrderDetails']);
+
+
 });

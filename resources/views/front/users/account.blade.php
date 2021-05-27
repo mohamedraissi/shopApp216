@@ -55,8 +55,8 @@
                             </div>
                             <div class="group-input">
                                 <label for="country" >Country *</label>
-                                <select name="country" id="country">
-                                    <option  value="Select Country"></option>
+                                <select class="span3" id="country" name="country" >
+                                    <option  value="Select Country" ></option>
                                     @foreach($countries as $country)
                                         <option value="{{ $country['country_name'] }}" @if( $country['country_name'] == $userDetails ['country']) selected="" @endif)>{{ $country['country_name'] }} 
                                         </option>

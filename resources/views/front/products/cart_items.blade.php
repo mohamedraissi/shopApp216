@@ -48,11 +48,11 @@
  <div class="row">
                         <div class="col-lg-4">
                             <div class="cart-buttons">
-                                <a href="#" class="primary-btn continue-shop">Continue shopping</a>
+                                <a href="{{ url('/index') }}" class="primary-btn continue-shop">Continue shopping</a>
                                 <a href="#" class="primary-btn up-cart">Update cart</a>
                             </div>
                             <div class="discount-coupon">
-                                <h6>Discount Codes</h6>
+                                <h6>Discount Codes </h6>
                                 <form id="ApplyCoupon" method="post" action="javascript:void(0);" class="coupon-form" @if(Auth::check()) user="1" @endif>
                                     @csrf
                                     <input name="code" id="code" type="text" placeholder="Enter Discount CODE" required="">
@@ -63,10 +63,17 @@
                         <div class="col-lg-4 offset-lg-4">
                             <div class="proceed-checkout">
                                 <ul>
-                                    <li class="subtotal">Subtotal <span>{{ $total_price }}</span></li>
-                                    <li class="cart-total">Total <span>{{ $total_price }}</span></li>
+                                    <li class="subtotal">Coupon Discount: <span>
+                                    @if(Session::has('CouponAmount'))
+                                        $ {{ Session::get('CouponAmount') }}
+                                   @else
+                                        $ 0
+                                    @endif
+                                    </span></li>
+                                    <li class="subtotal">Subtotal: <span>( ${{ $total_price }} -  <span class="CouponAmount">$0)=</span> </li>
+                                    <li class="grand_total">Total: <span>{{ $total_price - Session::get('CouponAmount')}}</span></li>
                                 </ul>
-                                <a href="#" class="proceed-btn">PROCEED TO CHECK OUT</a>
+                                <a href="{{url('checkout')}}" class="proceed-btn">PROCEED TO CHECK OUT</a>
                             </div>
                         </div>
                     </div>

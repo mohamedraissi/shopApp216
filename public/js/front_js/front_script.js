@@ -289,11 +289,28 @@ $("#ApplyCoupon").submit(function(){
       alert(resp.message);
     }
     $(".totalCartItems").html(resp.totalCartItems);
-        $("#AppendCartItems").html(resp.view);
+    $("#AppendCartItems").html(resp.view);
+      if(resp.CouponAmount>=0){
+        $(".CouponAmount").text("$"+resp.CouponAmount+") =");
+    }else {
+        $(".CouponAmount").text("$0"+") =");
+        }
+        if(resp.CouponAmount>=0){
+          $(".grand_total").text("$"+resp.grand_total);
+      
+        }
+                
   },error:function(){
     alert("Error");
   }
 })
 
+});
+//DELETE ADDRESS 
+$(document).on('click','.addressDelete',function(){
+var result = confirm("You want to delete this address?");
+if(!result){
+  return false;
+  }
 });
   

@@ -20,20 +20,15 @@ $sections =Section::sections();
             </div>
             <div class="ht-right">
             @if(Auth::check())
+                
                 <a href="{{ url('account') }}" class="login-panel"><i class="fa fa-user"></i>My Account</a>
-                <a href="{{ url('logout') }}" class="login-panel"><i class="fa fa-user"></i>Logout</a>
+                <a href="{{ url('logout') }}" class="login-panel" style="margin-left: auto; margin-right: auto;"><i class="fa fa-user"></i>Logout</a>
+                <a href="{{ url('orders') }}" class="login-panel" style="margin-left: auto; margin-right: auto;"><i class="fa fa-user"></i>Orders</a>
                 @else
                 <a href="{{ url('Login') }}" class="login-panel"><i class="fa fa-user"></i>Login</a>
                 <a href="{{ url('Register') }}" class="login-panel"><i class="fa fa-user"></i>Register</a>
                 @endif
-                <div class="lan-selector">
-                    <select class="language_drop" name="countries" id="countries" style="width:300px;">
-                        <option value='yt' data-image={{ asset("front/img/flag-1.jpg") }} data-imagecss="flag yt"
-                            data-title="English">English</option>
-                        <option value='yu' data-image={{ asset("front/img/flag-2.jpg") }} data-imagecss="flag yu"
-                            data-title="Bangladesh">German </option>
-                    </select>
-                </div>
+               
                 <div class="top-social">
                     <a href="#"><i class="ti-facebook"></i></a>
                     <a href="#"><i class="ti-twitter-alt"></i></a>
@@ -135,9 +130,9 @@ $sections =Section::sections();
                     <li><a href="#">{{$section['name']}}</a>
                         <ul class="dropdown">
                             @foreach($section['categories'] as $category)
-                                <li><a href="{{url($category['url'])}}">{{$category['category_name']}}</a></li>
+                                <li><a href="#">{{$category['category_name']}}</a></li>
                                     @foreach($category['subcategories'] as $subcategory)
-                                    <li><a href="{{url($subcategory['url'])}}" class="font-weight-normal pt-0 pl-5">{{$subcategory['category_name']}}</a></li>
+                                    <li><a href="#" class="font-weight-normal pt-0 pl-5">{{$subcategory['category_name']}}</a></li>
                                     @endforeach
                                     @if(count($section['categories'])>1)
                                         <hr class="mt-0"  style="border-top: 1px solid rgb(255 255 255 / 10%);margin-left:20px;margin-right:20px;"> 

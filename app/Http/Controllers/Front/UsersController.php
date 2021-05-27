@@ -207,7 +207,7 @@ return redirect('Login');
                     
                 ];
                 $this->validate($request,$rules,$customMessages);
-                
+        
                 $user = User::find($user_id);
                 $user->name = $data['name'];
                 $user->address = $data['address'];
