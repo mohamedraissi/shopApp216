@@ -69,7 +69,7 @@
 								 @elseif(!empty($productdata['category_id']) && $productdata['category_id']==$category['id']) selected="" @endif>{{ $category['category_name'] }}
 								 </option> 
 								   @foreach($category['subcategories'] as $subcategory)
-							         <option value="{{ $subcategory['category_name'] }}" @if(!empty(@old('category_id'))&& $category['id']==@old('category_id')) selected="" 
+							         <option value="{{ $subcategory['id'] }}" @if(!empty(@old('category_id'))&& $category['id']==@old('category_id')) selected="" 
 									 @elseif(!empty($productdata['category_id']) && $productdata['category_id']==$subcategory['id']) selected="" @endif>{{ $subcategory['category_name'] }}
 								     </option> 
 							       @endforeach
@@ -94,7 +94,7 @@
 								<select name="brand" id="" class="custom-select2 form-control select2-hidden-accessible" style ="width:100%;">
 								<option value="">select brand</option>	
 								@foreach($brands as $brand)
-									<option value="{{$brand->id}}">{{$brand->name}}</option>
+									<option value="{{$brand->id}}"@if (!empty ($productdata['brand_id'] )) @if($productdata['brand_id']==$brand->id ) selected @endif @endif >{{$brand->name}}</option>
 								@endforeach
 								</select>
 							</div>
@@ -191,7 +191,13 @@
 								@if (!empty ($productdata['product_meta_keyword'] )) {{$productdata['product_meta_keyword']}} @else {{old ('product_meta_keyword') }} @endif</textarea>
 							</div>
 						</div>
-
+						<div class="form-group col-md-6 col-sm-12">
+							<label class="col-sm-12  col-form-label">Color </label>
+							<div class="col-sm-12 col-md-12">
+  								<input type="color" id="favcolor" name="product_color" value="#ff0000" class="form-control">
+							</div>
+						</div>
+						
 					<div class ="card-footer col-sm-12">
 					<button type ="submit" class="btn btn-primary"> submit </button>
 					</div>

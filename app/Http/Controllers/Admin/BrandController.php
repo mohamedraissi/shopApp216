@@ -41,12 +41,13 @@ class BrandController extends Controller
            $message = "Brand updated successfully!";
        }
        if ($request->isMethod('post')){
+          
            $data = $request->all();
            //echo"<pre>";print_r($data);die;
       
            //Brand Validation 
            $rules =[
-            'brand_name' =>'required|regex:/^[\pL\s\-]+$/u',         
+            'brand_name' =>'required',         
            ];
 
         $customMessages =[
@@ -55,6 +56,7 @@ class BrandController extends Controller
              ];
         $this->validate($request,$rules,$customMessages);
         $brand->name = $data['brand_name'];
+        $brand->status=1;
         $brand-> save();
         session::flash('success_message',$message);
         return redirect('admin/brands');

@@ -68,11 +68,11 @@
 						 	@php $active=""; @endphp
 						 @endif
 
-							<li><a href="{{url('admin/add-subadmin')}}" class="{{$active}}">ajouter un sous admin</a></li>
+							<li><a href="{{url('admin/add-subadmin')}}" class="{{$active}}">add admin</a></li>
 							</ul>
 					</li>	
 
-					@if (Session::get('page')=="sections" || Session::get('page')=="brands" ||  Session::get('page')=="categories" || Session::get('page')=="banners")
+					@if (Session::get('page')=="orders" || Session::get('page')=="sections" || Session::get('page')=="brands" ||  Session::get('page')=="categories" || Session::get('page')=="banners")
 							@php  
 							$active="show";
 							$style='style=display:block'
@@ -117,20 +117,19 @@
 
 							<li><a href="{{url('admin/categories')}}" class="{{$active}}">Categories</a></li>
 							
-							@if (Session::get('page')=="products")
+							
+						 @if (Session::get('page')=="products")
+						 	@php $active="active"; @endphp
+						 @else
+						 	@php $active=""; @endphp
+						 @endif	
+							<li><a href="{{url('admin/products')}}" class="{{$active}}">Products</a></li>
+						@if (Session::get('page')=="orders")
 						 	@php $active="active"; @endphp
 						 @else
 						 	@php $active=""; @endphp
 						 @endif	
 						 <li><a href="{{url('admin/orders')}}" class="{{$active}}">Orders</a></li>
-
-							@if (Session::get('page')=="orders")
-						 	@php $active="active"; @endphp
-						 @else
-						 	@php $active=""; @endphp
-						 @endif
-
-							<li><a href="{{url('admin/products')}}" class="{{$active}}">Products</a></li>
 							
 							@if (Session::get('page')=="banners")
 						 	@php $active="active"; @endphp
@@ -139,14 +138,14 @@
 						 @endif
 							<li><a href="{{url('admin/banners')}}" class="{{$active}}">banners</a></li>
 
-							@if (Session::get('page')=="banners")
+							@if (Session::get('page')=="coupons")
 						 	@php $active="active"; @endphp
 						 @else
 						 	@php $active=""; @endphp
 						 @endif
 							<li><a href="{{url('admin/coupons')}}" class="{{$active}}">coupons</a></li>
 
-							@if (Session::get('page')=="coupons")
+							@if (Session::get('page')=="options")
 						 	@php $active="active"; @endphp
 						 @else
 						 	@php $active=""; @endphp

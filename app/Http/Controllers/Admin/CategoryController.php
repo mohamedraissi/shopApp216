@@ -112,7 +112,8 @@ if(empty($data['meta_keywords'])){
      $category->section_id=$data['section_id'];
      $category->category_name=$data['category_name'];
      $category->category_image=$imageName;
-     $category->category_discount=$data['category_discount'];
+     if(!empty($data['category_discount'])){$category->category_discount=$data['category_discount'];}else{$category->category_discount=0;}
+     
      $category->description=$data['description'];
      $category->url=$data['url'];
      $category->meta_title=$data['meta_title'];

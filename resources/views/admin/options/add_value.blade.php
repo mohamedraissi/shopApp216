@@ -73,7 +73,7 @@
                               <div>
                                   <input id="value" name="value[]" type="text" name="value[]" value="" placeholder="value" style="width:120px;" required="" />
 	
-                                  <a href="javascript:void(0);" class="add_button" title="Add field">Add</a>
+                                  <a href="javascript:void(0);" class="add_button_value" title="Add field">Add</a>
                                </div>
                           </div>
                         </div>

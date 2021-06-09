@@ -131,7 +131,7 @@
                    <h4 class="getAttrPrice">{{ $productDetails['product_price'] }}$</h4>
                      
                      <select class="span2 pull-left" name="size" id="getPrice" product-id="{{ $productDetails['id'] }}" required="" >
-                       <option value=""> Select Size </option>
+                       <option value=""> Select {{$productDetails['attributes'][0]['type_name'] }}</option>
                        @foreach($productDetails['attributes'] as $attribute)
                        <option value="{{ $attribute['size'] }}"> {{ $attribute['size'] }} </option>
                        @endforeach

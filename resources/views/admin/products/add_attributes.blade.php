@@ -75,7 +75,7 @@
 							
 						</div>
                   
-						<div class="form-group col-md-6 col-sm-12">
+						<div class="form-group col-md-4 col-sm-12">
 							<label for="exampleInputFile" class="col-sm-12  col-form-label">product Main Image</label>
 							<div class="col-sm-12 col-md-12">
 							
@@ -86,10 +86,11 @@
 							</div>
 							   
 						</div>
-                        <div class="form-group col-md-6 col-sm-12">
+                        <div class="form-group col-md-8 col-sm-12">
                           <div class="field_wrapper">
                               <div>
-                                  <input id="size" name="size[]" type="text" name="size[]" value="" placeholder="size" style="width:120px;" required="" />
+							  	  <input id="type_attr" name="type_attr[]" type="text" name="type_attr[]" value="" placeholder="attribute name" style="width:120px;" required="" />
+                                  <input id="size" name="size[]" type="text" name="size[]" value="" placeholder="attribute value" style="width:120px;" required="" />
 								  <input id="sku" name="sku[]" type="text" name="sku[]" value="" placeholder="sku" style="width:120px;" required="" />
 								  <input id="price" name="price[]" type="number" name="price[]" value="" placeholder="price" style="width:120px;" required="" />
 								  <input id="stock" name="stock[]" type="number" name="stock[]" value="" placeholder="stock" style="width:120px;" required="" />
@@ -122,7 +123,8 @@
 								<tr>
 									
 									<th>ID</th>
-									<th>Size</th>
+									<th>attribute name</th>
+									<th>attribute value</th>
                                     <th>SKU</th>
 									<th>Price</th>
 									<th>Stock</th>
@@ -137,13 +139,14 @@
 								<tr>
 									
 									<td>{{$attribute['id'] }}</td>
-									<td>{{$attribute['size'] }}</td>
-									<td>{{$attribute['sku'] }}</td>
+									<td><input type="text" name="type_attr[]" value="{{ $attribute['type_name'] }}" required="" style="width: 120px;"></td>
+									<td><input type="text" name="size[]" value="{{ $attribute['size'] }}" required="" style="width: 120px;"></td>
+									<td><input type="text" name="sku[]" value="{{ $attribute['sku'] }}" required="" style="width: 120px;"></td>
 									<td>
-									<input type="number" name="price[]" value="{{ $attribute['price'] }}" required="">
+									<input type="number" name="price[]" value="{{ $attribute['price'] }}" required="" style="width: 120px;">
 									</td>
 									<td>
-									<input type="number" name="stock[]" value="{{ $attribute['stock'] }}" required="">
+									<input type="number" name="stock[]" value="{{ $attribute['stock'] }}" required="" style="width: 120px;">
 									</td>
 									<td>
 							

@@ -18,16 +18,14 @@
                    
 							<div class="title">
 								<h4>Orders #{{ $orderDetails['id'] }} Details</h4>
-							<br>
-                            <br>
-
-                            <table  class="table table-bordered">
-                            <h3 class="card-title"> Customer Details</h3>
                             </div>
-                            <div class="card-body p-0">
-                            <table class="table">
-                            <thead>
-                            </tr>
+    							<br>
+                                <br>
+                               
+                                <h3 class="card-title"> Customer Details</h3>
+                            </div>
+                            
+                            <table class="table col-md-12">
                                 <tr>
                                     <td>Name</td>
                                     <td>{{$userDetails['name'] }}</td>
@@ -38,7 +36,7 @@
                                 </tr>
                                 <tr>
                                </table> 					
-                               <table class="table table-striped table-bordered">
+                               <table class="table table-striped table-bordered col-md-12">
                                 <tr>
                                     <td colspan="2"><strong>Billing Address</strong></td>
                                 </tr>
@@ -71,10 +69,10 @@
                                     <td>{{$userDetails['mobile'] }}</td>
                                 </tr>
 				</table>
-                        <div class="card-box mb-30">
+                        
 				<h2 class="h4 pd-20">Order Details</h2>
-				<div class="span4">
-                              <table class="table table-striped table-bordered">
+				
+                              <table class="table table-striped table-bordered col-md-12">
                                 <tr>
                                     <td>Order Date</td>
                                     <td> {{ date('d-m-Y', strtotime($orderDetails['created_at'])) }} </td>
@@ -122,9 +120,9 @@
 
                             </table>
 
-                        </div>
+                        
                         <br>
-                        <table class="table table-striped table-bordered">
+                       
                             <div class="span4">
                               <table class="table table-striped table-bordered">
                                 <tr>
@@ -159,7 +157,8 @@
                                     <td>{{$orderDetails['mobile'] }}</td>
                                 </tr>
 				</table>
-                <div class="">
+            </div>
+              
                             <div class="span8">
                                 <table class="table table-striped table-bordered">
                                     <tr>
@@ -229,12 +228,10 @@
 				</table>
                 </div>
                 </div>
-                <div class="footer-wrap pd-20 mb-20 card-box">
-				DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit Hingarajiya</a>
-			</div>
+                
 		
             
-		</div>
+
 	</div>
 	
 @endsection

@@ -2,6 +2,8 @@
   <?php
 use App\Models\Product; 
 use App\Models\Section;
+use App\Models\Cart;
+$userCartItems = Cart::userCartItems();
 $sections =Section::sections();
   
   ?>
@@ -11,7 +13,7 @@ $sections =Section::sections();
             <div class="ht-left">
                 <div class="mail-service">
                     <i class=" fa fa-envelope"></i>
-                    hello.colorlib@gmail.com
+                    fashi@gmail.com
                 </div>
                 <div class="phone-service">
                     <i class=" fa fa-phone"></i>
@@ -43,7 +45,7 @@ $sections =Section::sections();
             <div class="row">
                 <div class="col-lg-2 col-md-2">
                     <div class="logo">
-                        <a href="/index">
+                        <a href="/">
                             <img src={{ asset("front/img/logo.png" ) }}>
                         </a>
                     </div>
@@ -75,44 +77,38 @@ $sections =Section::sections();
                                 <div class="select-items">
                                     <table>
                                         <tbody>
+                                        <?php $total_price = 0; ?>
+                                        @foreach($userCartItems as $item)
+                                        <?php $attrPrice = Product::getDiscountedAttrPrice($item['product_id'],$item['size']); ?>
                                             <tr>
-                                                <td class="si-pic"><img src={{ asset("front/img/select-product-1.jpg") }} alt=""></td>
+                                                <td class="si-pic"><img src="{{ asset('images/product_images/small/'.$item['product']['main_image']) }}" alt=""></td>
                                                 <td class="si-text">
                                                     <div class="product-selected">
-                                                        <p>$60.00 x 1</p>
-                                                        <h6>Kabino Bedside Table</h6>
+                                                        <p>{{ $attrPrice['product_price']}} dt</p>
+                                                        
+                                                        <h6>{{ $item['product']['product_name'] }}</h6>
                                                     </div>
                                                 </td>
                                                 <td class="si-close">
                                                     <i class="ti-close"></i>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td class="si-pic"><img src={{ asset("front/img/select-product-2.jpg") }} alt=""></td>
-                                                <td class="si-text">
-                                                    <div class="product-selected">
-                                                        <p>$60.00 x 1</p>
-                                                        <h6>Kabino Bedside Table</h6>
-                                                    </div>
-                                                </td>
-                                                <td class="si-close">
-                                                    <i class="ti-close"></i>
-                                                </td>
-                                            </tr>
+                                            <?php $total_price = $total_price +   ($attrPrice['discounted_price'] * $item['quantity']); ?>
+                                        @endforeach    
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="select-total">
                                     <span>total:</span>
-                                    <h5>$120.00</h5>
+                                    <h5> {{ $total_price }} dt</h5>
                                 </div>
                                 <div class="select-button">
-                                    <a href="#" class="primary-btn view-card">VIEW CARD</a>
+                                    <a href="/cart" class="primary-btn view-card">VIEW CARD</a>
                                     <a href="/checkout" class="primary-btn checkout-btn">CHECK OUT</a>
                                 </div>
                             </div>
                         </li>
-                        <li class="cart-price">$150.00</li>
+                        <li class="cart-price">{{ $total_price }} dt</li>
                     </ul>
                 </div>
             </div>

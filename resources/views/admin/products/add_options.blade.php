@@ -87,16 +87,17 @@
 							    <tbody>
 								
 								@foreach($productdata['values'] as $value)
-								
+									@if(isset($value))
 								<tr>
 									<td>{{$value['option']["name"] }}</td>
 									<td>{{$value['value'] }}</td>
 									<td>
-									<a   href="javascript:void(0)" class ="confirmDelete dropdown-item"    record="{{$value['value']}}" recordid="{{$value['id'] }}" 
+									<a   href="javascript:void(0)" class ="confirmDelete dropdown-item"    record="option-in-product" recordid="{{$value['pivot']['product_id'] }}/{{$value['pivot']['productable_id'] }}" 
 												<?php /* href="{{url('admin/delete-product/'.$product->id) }}" */ ?>>
 												 <i class="dw dw-delete-2"></i> Delete</a>
 									</td>
 								</tr>
+								@endif
 								@endforeach
 							</tbody>
 						</table>

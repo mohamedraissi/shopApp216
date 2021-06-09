@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
@@ -46,11 +44,11 @@ class ProductsController extends Controller
            return response ()->json(['status'=>$status,'product_id'=>$data ['product_id']]);
         }
        }
-       public function deleteProduct($product,$id){
+       public function deleteProduct($id){
         //Delete Category 
         //dd($id);
         Product::where('id',$id)->delete();
-        $message = 'Product '.$product.' has been deleted successfully!';
+        $message = 'Product has been deleted successfully!';
         session::flash('success_message', $message);
             return redirect()->back();
       
@@ -67,7 +65,9 @@ class ProductsController extends Controller
         else{
             $title="Edit Product";
             $productdata = Product::find($id);
+            //dd($productdata->brand['id']);
             $productdata = json_decode(json_encode($productdata),true);
+            
             //echo"<pre>"; print_r($productdata);
             $product = Product::find($id);
             $message ="product update successfully!";
@@ -79,7 +79,7 @@ class ProductsController extends Controller
      $rules =[
         'category_id' => 'required',
         'brand' => 'required',
-        'product_name' => 'required|regex:/^[\pL\s\-]+$/u',
+        'product_name' => 'required',
         'product_code' => 'required|regex:/^[\w-]*$/',
         'product_price' =>'required|numeric',
         
@@ -156,6 +156,7 @@ class ProductsController extends Controller
       }
 
      $categoryDetails = Category::find($data['category_id']);
+     //dd($data['category_id']);
     // dd( $categoryDetails->section_id);
      //$product->section_id = $categoryDetails[' categoryDetails->section_id)'];
      $product->section_id=$categoryDetails->section_id;
@@ -163,10 +164,17 @@ class ProductsController extends Controller
      $product->product_name = $data['product_name'];
      $product->product_code = $data['product_code'];
      $product->product_price = $data['product_price'];
-     $product->product_discount = $data['product_discount'];
+     if (!empty($data['product_discount'])) {
+      $product->product_discount = $data['product_discount'];
+     }
+     else{
+      $product->product_discount = 0.00;
+     }
+     
      $product->product_description = $data['product_description'];
      $product->product_meta_description = $data['product_meta_description'];
      $product->product_meta_keyword = $data['product_meta_keyword'];
+     $product->product_color = $data['product_color'];
      $product->status=1;
      $product->brand_id=$data['brand'];
      $product->save();
@@ -192,7 +200,12 @@ class ProductsController extends Controller
 
         return view('admin.products.add_edit_product')->with(compact(['title','categories','productdata','brands','fabricArray','sleeveArray','patternArray','fitArray','occassionArray']));
       }
-
+      public function deleteOptionInporduct($id,$value_id){
+        ProductAble::where('product_id',$id)->where('productable_id',$value_id)->where("productable_type","App\Models\OptionValues")->delete();
+        $message ='Product option has been deleted successfully!';
+        session::flash('success_message', $message);
+        return redirect()->back();
+      }
       public function deleteProductImage($id){
         //Get product Image 
         $productImage = Product::select ('main_image')->where ('id',$id)-> first();
@@ -261,6 +274,7 @@ class ProductsController extends Controller
               $attribute->product_id = $id;
               $attribute->sku = $value;
               $attribute->size = $data['size'][$key];
+              $attribute->type_name = $data['type_attr'][$key];
               $attribute->price = $data['price'][$key];
               $attribute->stock = $data['stock'][$key];
               $attribute->status = 1; 
@@ -288,7 +302,7 @@ class ProductsController extends Controller
           foreach($data['attrId'] as $key => $attr) {
            if(!empty($attr)){
              ProductsAttribute::where(['id'=>$data['attrId'][$key]])->update(['price'=>$data
-             ['price'][$key],'stock'=>$data['stock'][$key]]);
+             ['price'][$key],'stock'=>$data['stock'][$key],'type_name'=>$data['type_attr'][$key],'size'=>$data['size'][$key]]);
            }
          }
         
@@ -457,7 +471,8 @@ class ProductsController extends Controller
         $options=Option::with('values')->get()->toArray();
         //echo "<pre>" ; print_r($options); die;
         $title ="Product options and values";
-        $productdata = Product::select('id','product_name','product_code','main_image')->with(['options','values.option'])->find($id)->toArray();
+        $productdata = Product::select('id','product_name','product_code','main_image',)->with(['options','values.option'
+        ])->find($id)->toArray();
         //echo "<pre>" ; print_r($productdata); die;
         return view('admin.products.add_options')->with(compact('title','options','productdata'));
       }

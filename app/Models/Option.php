@@ -10,8 +10,10 @@ class Option extends Model
     public function values(){
         return $this->hasMany('App\Models\OptionValues');
     }
+    
     public function products()
     {
         return $this->morphToMany(Product::class, 'productable');
     }
+    
 }

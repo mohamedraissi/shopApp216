@@ -89,9 +89,9 @@
 												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
 												<a class="dropdown-item" href="{{url('admin/add-edit-product/'.$product->id) }}"><i class="dw dw-edit2"></i> Edit</a>
 												<a class="dropdown-item" href="{{ url('admin/add-options/'.$product->id) }}"><i class="icon-copy dw dw-add"></i> add option</a>
-												<a class="dropdown-item" href="{{ url('admin/add-attributes/'.$product->id) }}"><i class="icon-copy dw dw-add"></i> add</a>
+												<a class="dropdown-item" href="{{ url('admin/add-attributes/'.$product->id) }}"><i class="icon-copy dw dw-add"></i> add attr</a>
 												<a class="dropdown-item" href="{{ url('admin/add-images/'.$product->id) }}"><i class="icon-copy dw dw-add"></i> Image</a>
-												<a   href="javascript:void(0)" class ="confirmDelete dropdown-item"    record="{{$product->product_name}}" recordid="{{$product->id }}" 
+												<a   href="javascript:void(0)" class ="confirmDelete dropdown-item"    record="product" recordid="{{$product->id }}" 
 												<?php /* href="{{url('admin/delete-product/'.$product->id) }}" */ ?>>
 												 <i class="dw dw-delete-2"></i> Delete</a>
 												 
@@ -110,7 +110,7 @@
 				
 			</div>
 			<div class="footer-wrap pd-20 mb-20 card-box">
-				DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit Hingarajiya</a>
+				© 2021 Shop 216 - All rights reserved | Powered  by nour and rim 
 			</div>
 		</div>
 	</div>

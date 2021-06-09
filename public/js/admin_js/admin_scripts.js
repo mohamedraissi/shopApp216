@@ -202,11 +202,26 @@ $(document).ready(function(){
             }
         });
     });
+ //add value option 
+
+var maxFieldValue = 10; //Input fields increment limitation
+var addButtonValue = $('.add_button_value'); //Add button selector
+var wrappervalue = $('.field_wrapper'); //Input field wrapper
+var fieldHTMLValue = '<div class="mt-2"><div style=""height:10px;></div><input id="value" name="value[]" type="text"  value="" placeholder="value" style="width:120px;" required="" /> &nbsp;<a href="javascript:void(0);" class="remove_button">Delete</a></div>'; //New input field html 
+   var x = 1; //Initial field counter is 1
+$(addButtonValue).click(function(){
+   //Check maximum number of input fields
+   
+   if(x < maxField){ 
+       x++; //Increment field counter
+       $(wrappervalue).append(fieldHTMLValue); //Add field html
+   }
+});
 //add attr product
     var maxField = 10; //Input fields increment limitation
     var addButton = $('.add_button'); //Add button selector
     var wrapper = $('.field_wrapper'); //Input field wrapper
-    var fieldHTML = '<div class="mt-2"><div style=""height:10px;></div><input type="text" name="size[]" style="width:120px"/>&nbsp;<input type="text" name="sku[]" style="width:120px"/>&nbsp<input type="text" name="price[]" style="width:120px"/>&nbsp;<input type="text" name="stock[]" style="width:120px"/>&nbsp;<a href="javascript:void(0);" class="remove_button">Delete</a></div>'; //New input field html 
+    var fieldHTML = '<div class="mt-2"><div style=""height:10px;></div><input id="type_attr" name="type_attr[]" type="text" name="type_attr[]" value="" placeholder="attribute name" style="width:120px;" required="" /><input type="text" name="size[]" placeholder="attribute value" style="width:120px" />&nbsp;<input type="text" name="sku[]" placeholder="sku" style="width:120px"/>&nbsp<input type="text" name="price[]" placeholder="price" style="width:120px"/>&nbsp;<input type="text" name="stock[]" placeholder="stock" style="width:120px"/>&nbsp;<a href="javascript:void(0);" class="remove_button">Delete</a></div>'; //New input field html 
     var x = 1; //Initial field counter is 1
    
     
@@ -237,9 +252,9 @@ $(document).ready(function(){
             success:function(resp){
              
               if (resp['status']==0){
-                  $("#attribute-"+attribute_id).html("Inactive");
+                  $("#attribute-"+attribute_id).html("<a class='updateProductStatus' href ='javascript::void(0)'> <span class='badge badge-danger'>Inactive </span></a>");
               }else if (resp['status']==1){
-                $("#attribute-"+attribute_id).html("Active");
+                $("#attribute-"+attribute_id).html("<a class='updateProductStatus' href ='javascript::void(0)'><span class='badge badge-success'> Active </span> </a>");
 
 
               }
@@ -363,27 +378,28 @@ $(" .updatecouponStatus").click(function(){
     });
    
    
-      $("#ManualCoupon").click(function(){
-        $("#couponField").show();
-    });
- 
-    $("#AutomaticCoupon").click(function(){
-     $("#couponField").hide();
- });
-      // SHOW COURIER NAME AND TRACKING NUMBER 
-      $("#courier_name").hide();
-      $("#tracking_number").hide();
-      $("#order_status").on("change",function(){
-          alert(this.value);
-     if(this.value == "Shipped"){
-        $("#courier_name").show();
-        $("#tracking_number").show();
-     }else {
-        $("#courier_name").hide();
-        $("#tracking_number").hide();
-     }
-});
+      
   
 });
 
 
+$("#ManualCoupon").click(function(){
+    $("#couponField").show();
+});
+
+$("#AutomaticCoupon").click(function(){
+ $("#couponField").hide();
+});
+  // SHOW COURIER NAME AND TRACKING NUMBER 
+  $("#courier_name").hide();
+  $("#tracking_number").hide();
+  $("#order_status").on("change",function(){
+      alert(this.value);
+ if(this.value == "Shipped"){
+    $("#courier_name").show();
+    $("#tracking_number").show();
+ }else {
+    $("#courier_name").hide();
+    $("#tracking_number").hide();
+ }
+});

@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Option;
 use App\Models\OptionValues;
+use App\Models\ProductAble;
+
 use Session;
 class OptionController extends Controller
 {
@@ -63,14 +65,31 @@ class OptionController extends Controller
            return view ('admin.options.add_edit_option')->with(compact('title','option'));
        } 
        public function deleteOption($id){
+        
+       
         //Delete option 
+        $option= Option::where('id',$id)->get();
+        Option::find($id)->values()->delete();
         Option::where('id',$id)->delete();
+       
+        $tab=[];
+        foreach ($option->values() as $key => $value) {
+         $tab[$key]=$value->id;
+        }
+        ProductAble::where('productable_id',$id)->delete();
+        ProductAble::whereIn('productable_id',$tab)->delete();
         $message = 'options  has been deleted successfully!';
         session::flash('success_message',$message);
         return redirect('admin/options');
     
     }
-
+    public function deleteValue($id){
+      OptionValues::find($id)->delete();
+      $message = 'options value  has been deleted successfully!';
+      session::flash('success_message',$message);
+      return redirect()->back();
+    }
+    
 
     public function addValues(Request $request,$id){
         if($request->isMethod('post')){

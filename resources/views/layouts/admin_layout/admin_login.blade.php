@@ -52,7 +52,7 @@
 				<div class="col-md-6 col-lg-5">
 					<div class="login-box bg-white box-shadow border-radius-10">
 						<div class="login-title">
-							<h2 class="text-center text-primary">Login To DeskApp</h2>
+							<h2 class="text-center text-primary">Login To Shop216</h2>
 						</div>
                     @if(Session::has('error_message'))
 						<div class="alert alert-warning alert-dismissible fade show" role="alert">

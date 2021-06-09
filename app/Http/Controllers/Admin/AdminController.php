@@ -31,9 +31,9 @@ class AdminController extends Controller
                 'password' => 'required',
             ];
             $customMessages =[
-                'email.required' => 'Adresse E-mail est obligatoire',
-                'email.email' => 'Une adresse E-mail valable est obligatoire',
-                'password.required' => 'Mot de passe est obligatoire',
+                'email.required' => 'Email address is required',
+                'email.email' => 'A valid email address is required',
+                'password.required' => 'Password is required',
             ];
             $this->validate($request,$rules,$customMessages);
         
@@ -41,7 +41,7 @@ class AdminController extends Controller
            if(Auth::guard('admin')->attempt(['email'=>$data['email'],'password'=>$data['password']])){
                return redirect('admin/dashboard');}
                else{
-                   Session::flash('error_message','Adresse E-mail ou mot de passe invalide');
+                   Session::flash('error_message','Invalid email address or password');
                    return redirect()->back();
                }
            }
@@ -92,19 +92,19 @@ class AdminController extends Controller
                 'admin_name' =>'required|regex:/^[\pL\s\-]+$/u',
                 'admin_phone' => 'required|numeric',
                 'admin_image' =>'image',
-                
             ];
             $customMessages =[
                 'admin_name.required' =>'Name is required',
                 'admin_name.regex' =>' Valid Name is required',
                 'admin_phone.required'=>'phone is required',
-                'admin_phone.numeric'=>' Valid phone is required',
+                'admin_phone.numeric'=>' Valid phone is numeric',
                 'admin_image.image' =>'Valid image is required',
 
             ];
             $this->validate($request,$rules,$customMessages);
 
              //upload image
+             $imageName=$data['current_admin_image'];
             if($request->hasFile('admin_image')){
                 $image_tmp = $request->file('admin_image');
                 if($image_tmp->isValid()){
@@ -129,8 +129,6 @@ class AdminController extends Controller
             ->update(['name'=>$data['admin_name'],'phone'=>$data['admin_phone'],'image'=>$imageName]);
             Session::flash('success_message','Admin details update successufly!');
             return redirect()->back();
-            
-
 
         }
         return view('layouts.admin_layout.update_admin_details');
@@ -171,7 +169,21 @@ class AdminController extends Controller
 
 
             ];
-           
+            if($request->hasFile('admin_image')){
+                $image_tmp = $request->file('admin_image');
+                if($image_tmp->isValid()){
+                    //get image extension
+                    $extension = $image_tmp->getClientOriginalExtension();
+                    // generate new image name
+                    $imageName = rand(111,99999).'.'.$extension;
+                    $imagePath = 'images/admin_images/'.$imageName;
+                    
+                    //upload the image
+                    Image::make($image_tmp)->save($imagePath);
+                }else{
+                    $imageName ="admin.png";
+                }
+         }
             $this->validate($request,$rules,$customMessages);
             $subadmin =new Admin();
             $subadmin->name=$request->input('admin_name');
@@ -179,13 +191,13 @@ class AdminController extends Controller
             $subadmin->phone=$request->input('admin_phone');
             $subadmin->email=$request->input('email');
             $subadmin->password=bcrypt($request->input('password'));
-            $subadmin->image=$request->input('admin_image');
+            $subadmin->image=$imageName;
             $subadmin->status=$request->input('admin_status');
             $subadmin->role=$request->input('admin_role');
 
             $subadmin->save();
             
-
+            Session::flash('success_message','admin have been successfuly inserted !');
             return back()->with('success','admin have been successfuly inserted');
         }
         

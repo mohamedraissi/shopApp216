@@ -108,7 +108,7 @@
 							<label class="col-sm-12  col-form-label">Category Discount</label>
 							<div class="col-sm-12 col-md-12">
 								<input  type="text" class="form-control"  id="category_discount" name="category_discount" placeholder="Enter Category Name" 
-								@if (!empty ($categorydata['category_discount'] )) value="{{$categorydata['category_discount']}}" @else value="{{old ('category_discount') }}" @endif>
+								@if (!empty($categorydata['category_discount'] )|| (isset($categorydata['category_discount']) && $categorydata['category_discount']==0)) value="{{$categorydata['category_discount']}}" @else value="{{old ('category_discount') }}" @endif>
 							</div>
 						</div>
 

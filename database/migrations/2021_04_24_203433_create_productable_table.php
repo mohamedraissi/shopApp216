@@ -14,6 +14,7 @@ class CreateProductableTable extends Migration
     public function up()
     {
         Schema::create('productables', function (Blueprint $table) {
+            $table->id();
             $table->integer("product_id");
             $table->integer("productable_id");
             $table->string("productable_type");

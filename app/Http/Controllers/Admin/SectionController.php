@@ -11,7 +11,7 @@ class SectionController extends Controller
     public function sections(){
         Session::put('page',"sections");
         $sections = Section::get();
-        return view('admin.sections.sections')->with(compact('sections'));
+        return view('admin.sections.sections')->with(compact('sections')); 
     }
     public function updateSectionStatus (Request $request){
      if ($request->ajax()){
@@ -59,7 +59,7 @@ class SectionController extends Controller
             return redirect('admin/sections');
     
            }
-           return view ('admin.sections.add_edit_section')->with(compact('title','section'));
+           return view ('admin.sections.add_edit_section')->with(compact('title','section')); 
        } 
        public function deleteSection($id){
         //Delete Brand 

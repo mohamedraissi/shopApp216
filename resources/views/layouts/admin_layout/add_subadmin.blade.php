@@ -148,16 +148,24 @@
 															</div>
 															<div class="form-group">
 																<label>image</label>
-																<input  class="form-control form-control-lg" name="admin_image" id="admin_image">
+																<input  class="form-control form-control-lg" type="file" name="admin_image" id="admin_image">
 																   
 															</div>
                                                             <div class="form-group">
 																<label>Admin status</label>
-																<input class="form-control form-control-lg" name="admin_status" id="admin_status"  placeholder="Enter admin status" >
+																<select name="admin_status" id="" class="form-control form-control-lg" >
+																	<option value="0">Inactive</option>
+																	<option value="2">Active</option>
+																	
+																</select>
 															</div>
                                                             <div class="form-group">
 																<label>Admin role</label>
-																<input class="form-control form-control-lg" name="admin_role" id="admin_role"  placeholder="Enter admin role" >
+																<select name="admin_role" id="" class="form-control form-control-lg" >
+																	<option value="1">Administrator</option>
+																	<option value="2">Editor</option>
+																	<option value="3">Author</option>
+																</select>
 															</div>
 
 															

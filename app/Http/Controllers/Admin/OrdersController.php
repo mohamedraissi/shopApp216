@@ -13,12 +13,15 @@ use Session;
 class OrdersController extends Controller
 {
     public function Orders(){
+        Session::put('page',"orders");
         $orders = Order::with('orders_products')->orderBy('id','Desc')->get()->toArray();
+        //echo"<pre>"; print_r($orders);die;
         return view('admin.orders.orders')->with(compact('orders'));
     }
 
 
     public function orderDetails($id){
+        Session::put('page',"orders");
         $orderDetails = Order::with ('orders_products')->where('id',$id)->first()->toArray();
         $userDetails = User::where('id',$orderDetails['user_id'])->first()->toArray();
         $orderStatus = OrderStatus::where('status',1)->get()->toArray();

@@ -210,7 +210,7 @@ if($avaibaleSize==0){
     return response()->json([
       'status'=>false,
       
-      'view'=>(String)View::make('front.products.cart_items')->with(compact('userCartItems'))
+      'view'=>(String)View::make('front.products.cart_items')->with(compact('userCartItems')) 
       
 
 ]);

@@ -14,6 +14,7 @@ class CouponController extends Controller
     public function coupons(){
         Session::put('page','coupons');
         $coupons = Coupon::get()->toArray();
+
         return view('admin.coupons.coupons')->with(compact('coupons'));
     }
     public function updatecouponStatus (Request $request){

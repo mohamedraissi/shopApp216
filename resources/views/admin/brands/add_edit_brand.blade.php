@@ -19,7 +19,7 @@
 						</button>
 					</div>
 		@endif
-	<form name="brandForm", id="brandForm" @if(empty($categorydata['id'])) action="{{url('admin/add-edit-brand') }}" 
+	<form name="brandForm", id="brandForm" @if(empty($brand['id'])) action="{{url('admin/add-edit-brand') }}" 
 	@else action="{{url('admin/add-edit-brand/'.$brand['id'] ) }}" @endif  method="post" enctype="multipart/form-data">@csrf
 		<div class="pd-ltr-20 xs-pd-20-10">
 			<div class="min-height-200px">

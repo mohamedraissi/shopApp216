@@ -32,9 +32,9 @@ use App\Models\Product;
 */
 use App\Models\Category;
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
@@ -90,17 +90,21 @@ Route::prefix('/admin')->namespace('Admin')->group(function(){
    //Attributes
    Route::match(['get','post'],'add-attributes/{id}',[ProductsController::class, 'addAttributes']);
    Route::post('edit-attributes/{id}',[ProductsController::class, 'editAttributes']);
+  Route::post('update-attribute-status', [ProductsController::class,'updateAttributeStatus'] );
+
      //image
   Route::match(['get','post'],'add-images/{id}', [ProductsController::class,'addImages']);
   Route::post('update-image-status', [ProductsController::class,'updateImageStatus'] );
   Route::get('delete-image/{id}', [ProductsController::class,'deleteImage'] );
   //add option in product
   Route::match(['get','post'],'add-options/{id}',[ProductsController::class, 'addOptions']);
+  Route::get('delete-option-in-product/{id}/{value_id}/' , [ProductsController::class, 'deleteOptionInporduct']);
   //Option
   Route::get ('options',[OptionController::class,'options']);
   Route::post('update-option-status', [OptionController::class,'updateOptionStatus'] );
   Route::match(['get','post'], 'add-edit-option/{id?}',[OptionController::class,'addEditOption']);
   Route::get('delete-option/{id}' , [OptionController::class, 'deleteOption']);
+  Route::get('delete-value/{id}' , [OptionController::class, 'deleteValue']);
   Route::match(['get','post'],'add-value/{id}' , [OptionController::class,'addValues']);
   Route::post('edit-value/{id}',[OptionController::class, 'editValues']);
   Route::post('update-value-status', [OptionController::class,'updateValueStatus'] );
@@ -120,7 +124,7 @@ Route::prefix('/admin')->namespace('Admin')->group(function(){
   
 });
 
-Route::get('index', [ClientController::class,'index']);
+Route::get('/', [ClientController::class,'index']);
 Route::get('shop', [ClientController::class,'shop']);
 Route::get('blog', [ClientController::class,'blog']);
 Route::get('contact', [ClientController::class,'contact']);

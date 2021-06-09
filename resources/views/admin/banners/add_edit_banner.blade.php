@@ -96,7 +96,7 @@
 								@endif
 							
 									@if(!empty($banner['banner_image'])) 
-										<div class="d-flex align-items-center"> <img style="width:100px; margin-top:5px; " src="{{asset('images/banner_images/'.$banner['banner_image']) }}" alt="">
+										<div class="d-flex align-items-center"> <img style="width:100px; margin-top:5px; " src="{{asset('images/banners_images/'.$banner['banner_image']) }}" alt="">
 										<a class="confirmDelete ml-4"  href="javascript:void(0)" record="banner-image" recordid="{{$banner['id'] }}" <?php /*href="{{url('admin/delete-banner-image/'.$banner['id']) }}" */ ?>>  Delete image </a>
 										</div>
 									@endif
