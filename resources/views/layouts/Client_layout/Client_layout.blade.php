@@ -25,15 +25,30 @@
     <link rel="stylesheet" href={{ asset("front/css/jquery-ui.min.css") }} type="text/css">
     <link rel="stylesheet" href={{ asset("front/css/slicknav.min.css") }} type="text/css">
     <link rel="stylesheet" href={{ asset("front/css/style.css") }} type="text/css">
+    <link rel="stylesheet" href={{ asset("front/css/default.min.css") }} type="text/css">
     <style>
 form.cmxform label.error, label.error {
     background-color: #e7ab3c;
     font-style: italic;
 }
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    background-color:black !important;
+    color:white;
+}
+.detail-nav-link.nav-link:hover, .detail-nav-link.nav-link {
+    background-color:white !important;
+    color:black;
+}
+a.disabled {
+  /* Make the disabled links grayish*/
+  color: gray;
+  /* And disable the pointer events */
+  pointer-events: none;
+}
     </style>
    
 </head>
-<body>
+<body style="overflow-x: hidden;">
        
     <div id="preloder">
         <div class="loader"></div>

@@ -454,7 +454,7 @@ if($avaibaleSize==0){
                 ];
 
                 Mail::send('emails.order',$messageData,function($message) use($email){
-                    $message->to($email)->subject('Order Placed - shop216');
+                    $message->to($email)->subject('Order Placed - shop216'); 
                 });
                 return redirect ('/thanks');
             }else {

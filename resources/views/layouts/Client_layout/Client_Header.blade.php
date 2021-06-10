@@ -61,12 +61,7 @@ $sections =Section::sections();
                 </div>
                 <div class="col-lg-3 text-right col-md-3">
                     <ul class="nav-right">
-                        <li class="heart-icon">
-                            <a href="#">
-                                <i class="icon_heart_alt"></i>
-                                <span>1</span>
-                            </a>
-                        </li>
+                       
                         <li class="cart-icon">
                             <a href="{{ url('cart') }}">
                                 <i class="icon_bag_alt"></i>
@@ -126,9 +121,9 @@ $sections =Section::sections();
                     <li><a href="#">{{$section['name']}}</a>
                         <ul class="dropdown">
                             @foreach($section['categories'] as $category)
-                                <li><a href="#">{{$category['category_name']}}</a></li>
+                                <li><a href="{{url($category['url'])}}">{{$category['category_name']}}</a></li>
                                     @foreach($category['subcategories'] as $subcategory)
-                                    <li><a href="#" class="font-weight-normal pt-0 pl-5">{{$subcategory['category_name']}}</a></li>
+                                    <li><a href="{{url($subcategory['url'])}}" class="font-weight-normal pt-0 pl-5">{{$subcategory['category_name']}}</a></li>
                                     @endforeach
                                     @if(count($section['categories'])>1)
                                         <hr class="mt-0"  style="border-top: 1px solid rgb(255 255 255 / 10%);margin-left:20px;margin-right:20px;"> 
@@ -137,7 +132,6 @@ $sections =Section::sections();
                         </ul>
                     </li>
                     @endforeach
-                    <li><a href="/blog">Blog</a></li>
                     <li><a href="/contact">Contact</a></li>
                   
                 </ul>

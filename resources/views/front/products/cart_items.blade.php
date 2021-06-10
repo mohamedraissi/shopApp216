@@ -1,9 +1,12 @@
 <?php use App\Models\Product; ?>
+<div class="cart-table">
+
+
 <table>
                             <thead>
                                 <tr>
                                     <th>Image</th>
-                                    <th class="p-name">Product Name</th>
+                                    <th class="p-name"> Name</th>
                                     <th>Description</th>
                                     <th>Unit Price</th>
                                     <th>Discount</th>
@@ -18,7 +21,7 @@
                                 @foreach($userCartItems as $item)
                                 <?php $attrPrice = Product::getDiscountedAttrPrice($item['product_id'],$item['size']); ?>
                                 <tr>
-                                    <td class="cart-pic first-row"><img src="{{ asset('images/product_images/small/'.$item['product']['main_image']) }}" alt=""></td>
+                                    <td class="cart-pic first-row"><img src="{{ asset('images/product_images/small/'.$item['product']['main_image']) }}" alt="" style="width:70px;"></td>
                                     <td class="cart-title first-row">
                                         <h5> {{ $item['product']['product_name'] }}</h5></br>
                                        
@@ -41,7 +44,7 @@
                                     </td>
                                     
                                     <td class="price first-row" style="color:green">{{ $attrPrice['discounted_price']}}</td>
-                                    <td class="close-td first-row btnItemDelete" data-cartid="{{$item['id']}}" type="button"><i class="ti-close"></i></td>
+                                    <td class="close-td first-row  btnItemDelete" data-cartid="{{$item['id']}}" ><i class="ti-close"></i></td>
                                 </tr>
                                 <?php $total_price = $total_price +   ($attrPrice['discounted_price'] * $item['quantity']); ?>
                                 @endforeach
@@ -55,7 +58,7 @@
                                 <h6>Discount Codes </h6>
                                 <form id="ApplyCoupon" method="post" action="javascript:void(0);" class="coupon-form" @if(Auth::check()) user="1" @endif>
                                     @csrf
-                                    <input name="code" id="code" type="text" placeholder="Enter Discount CODE" required="">
+                                    <input name="code" id="code" type="text" placeholder="Enter Discount CODE" required="" style="height: 46px;border: 2px solid #ebebeb;color: #b2b2b2;font-size: 14px;padding-left: 20px;">
                                     <button type="submit" class="site-btn coupon-btn">Apply</button>
                                 </form>
                             </div>
@@ -80,3 +83,7 @@
                                
                             </tbody>
                         </table>
+                        </div>    
+
+
+                    

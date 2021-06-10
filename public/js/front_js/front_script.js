@@ -58,9 +58,12 @@ $(document).ready(function(){
           type:'post',
           success:function(resp){
             if(resp['discounted_price']>0){
-              $(".getAttrPrice").html("<del>"+resp['product_price']+"$"+"</del> <br>" +"<ins style=color:green>"+resp['discounted_price']+"$"+"</ins>");
+             
+              
+              
+              $(".getAttrPrice").html('<li class="list-inline-item h4 font-weight-light mb-0">'+resp['discounted_price']+'dt</li><li class="list-inline-item text-muted font-weight-light"><del>'+resp['product_price']+'</del></li>');
             }else{
-              $(".getAttrPrice").html(+resp['product_price']+"$");
+              $(".getAttrPrice").html('<li class="list-inline-item h4 font-weight-light mb-0">'+resp['product_price']+'</li>dt');
             }
           },error:function(){
               alert("Error")
