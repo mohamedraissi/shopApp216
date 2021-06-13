@@ -24,8 +24,9 @@
     <link rel="stylesheet" href={{ asset("front/css/nice-select.css") }} type="text/css">
     <link rel="stylesheet" href={{ asset("front/css/jquery-ui.min.css") }} type="text/css">
     <link rel="stylesheet" href={{ asset("front/css/slicknav.min.css") }} type="text/css">
-    <link rel="stylesheet" href={{ asset("front/css/style.css") }} type="text/css">
     <link rel="stylesheet" href={{ asset("front/css/default.min.css") }} type="text/css">
+    <link rel="stylesheet" href={{ asset("front/css/style.css") }} type="text/css">
+    
     <style>
 form.cmxform label.error, label.error {
     background-color: #e7ab3c;

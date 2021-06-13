@@ -116,7 +116,7 @@ $sections =Section::sections();
             <nav class="nav-menu mobile-menu">
                 <ul>
                     <li class="active"><a href="/index">Home</a></li>
-                    <li><a href="/shop">Shop</a></li>
+                    
                     @foreach($sections as $section)
                     <li><a href="#">{{$section['name']}}</a>
                         <ul class="dropdown">

@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use Auth;
 use Session;
 use App\Models\Admin;
+use App\Models\Product;
+use App\Models\Section;
+use App\Models\Category;
+use App\Models\Brand;
+use App\Models\Order;
 use Hash;
 use Image;
 use DB;
@@ -15,7 +20,21 @@ class AdminController extends Controller
 {
     public function dashboard(){
         Session::put('page',"dashboard");
-        return view('layouts.admin_layout.admin_dashboard');
+        $nbrecategory=Category::count();
+        $nbresection=Section::count();
+        $nbreproducts = Product::count();
+        $nbreorders = Order::count();
+        $products = Product::with(['brand'=> function($query){
+            $query->select('id','name');
+        }
+        ,'category'=> function($query){
+            $query->select('id','category_name');
+        }
+        ,'section'=>function($query){
+            $query->select('id','name');
+        }])->inRandomOrder()->limit(5)->get();
+        //dd($products);
+        return view('layouts.admin_layout.admin_dashboard')->with(compact('products','nbrecategory','nbresection','nbreproducts','nbreorders'));
     }
     public function settings(){
         Session::put('page',"settings");

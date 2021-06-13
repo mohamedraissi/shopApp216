@@ -15,16 +15,33 @@ $(document).ready(function(){
           }
       });
     });
-    $('.filter').on('click',function(){
+    $('.filter-value').on('click',function(){
       
-      var filter =get_filter(this.className);
+      var filter_value =get_filter(this.className);
       console.log(this.className);
       var sort =$("#sort option:selected").text();
+      var filter_brand =get_filter('filter-brand');
       var url=$("#url").val();
       $.ajax({
         url:url,
         //method:"post",
-        data:{filter:filter,sort:sort,url:url,},
+        data:{filter_value:filter_value,filter_brand:filter_brand,sort:sort,url:url,},
+        success:function(data){
+          $(".product-list").html(data);
+        }
+    });
+    });
+    $('.filter-brand').on('click',function(){
+      
+      var filter_brand =get_filter(this.className);
+      console.log(this.className);
+      var sort =$("#sort option:selected").text();
+      var filter_value =get_filter("filter-value");
+      var url=$("#url").val();
+      $.ajax({
+        url:url,
+        //method:"post",
+        data:{filter_brand:filter_brand,filter_value:filter_value,sort:sort,url:url,},
         success:function(data){
           $(".product-list").html(data);
         }

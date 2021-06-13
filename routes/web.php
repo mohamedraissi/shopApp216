@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductsController;
@@ -36,9 +37,7 @@ use App\Models\Category;
     return view('welcome');
 });*/
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+
 
 Route::prefix('/admin')->namespace('Admin')->group(function(){
 
@@ -118,7 +117,7 @@ Route::prefix('/admin')->namespace('Admin')->group(function(){
   Route::get('/orders',[OrdersAdmin::class, 'Orders']);
   Route::get('/orders/{id}',[OrdersAdmin::class, 'OrderDetails']);
   Route::post('/update-order-status',[OrdersAdmin::class, 'UpdateOrderStatus']);
-  Route::get('view-order-invoice/{id}',[OrdersAdmin::class, 'viewOrderInvoice']);
+  Route::get('view-order-invoice/{id}',[OrdersAdmin::class, 'viewOrderInvoice']); 
 
   });
   

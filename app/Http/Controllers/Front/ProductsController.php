@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Models\DeliveryAddress;
 use App\Models\Country;
 use App\Models\Order;
+use App\Models\Brand;
 use App\Models\OrdersProduct;
 use App\Models\SMS;
 use DB;
@@ -29,7 +30,7 @@ class ProductsController extends Controller
             $data=$request->all();
            // echo "<pre>";print_r($data);die;
             $url=$data['url'];
-            $categoryCount = Category::where(['url'=>$url,'status'=>1])-> count();
+            $categoryCount = Category::where(['url'=>$url,'status'=>1])->count();
             $categoryDetails = Category::categoryDetails($url);
             $categoryProducts = Product::with(['brand','options','values'])->whereIn('category_id', $categoryDetails['catIds'])
                ->where('status',1);
@@ -41,11 +42,24 @@ class ProductsController extends Controller
                $categoryProducts = Product::with(['brand'])->whereIn('category_id', $categoryDetails['catIds'])
                ->where('status',1);
                
-               //if Fabric filter is selected 
-               if (isset($data['filter']) && !empty($data['filter'])) {
-                $categoryProducts->whereHas('values', function ($query) use ($data) {
-                    return $query->whereIn('id',$data['filter']);
-                })->get()->toArray();
+               //if option filter is selected 
+               if ( (isset($data['filter_value']) && !empty($data['filter_value'])) || (isset($data['filter_brand']) && !empty($data['filter_brand']))) {
+                   
+                  if (isset($data['filter_value']) && !empty($data['filter_value']) ) {  
+                    $categoryProducts->whereHas('values', function ($query) use ($data) {
+                        return $query->whereIn('option_values.id',$data['filter_value']);
+                    })->get()->toArray();
+            }
+                if (isset($data['filter_brand']) && !empty($data['filter_brand']) ) {
+                    $categoryProducts->whereIn('brand_id',$data['filter_brand'])->get()->toArray();
+                   }
+
+                   if ( (isset($data['filter_value']) && !empty($data['filter_value'])) && (isset($data['filter_brand']) && !empty($data['filter_brand']))) {
+                    
+                    $categoryProducts->whereHas('values', function ($query) use ($data) {
+                        return $query->whereIn('option_values.id',$data['filter_value']);
+                    })->orWhereIn('brand_id',$data['filter_brand'])->get()->toArray();
+                   }
                }
                //if sort ooption selected by user
                if (isset($data['sort']) && !empty($data['sort'])) {
@@ -83,6 +97,7 @@ class ProductsController extends Controller
         else{
             $url=Route::getFacadeRoot()->current()->uri();
             $options=Option::with('values')->get();
+            $brands=Brand::get();
             $categoryCount = Category::where(['url'=>$url,'status'=>1])-> count();
             if($categoryCount>0){
                $categoryDetails = Category::categoryDetails($url);
@@ -92,17 +107,11 @@ class ProductsController extends Controller
                $categoryProducts= $categoryProducts->paginate(3);
                /*echo "<pre>"; print_r($categoryProducts);die;*/
 
-                //product arrays
-                $productFilters=Product::productFilters();
-                $fabricArray=$productFilters['fabricArray'];
-                $sleeveArray=$productFilters['sleeveArray'];
-                $patternArray=$productFilters['patternArray'];
-                $fitArray=$productFilters['fitArray'];
-                $occassionArray=$productFilters['occassionArray'];
+              
                  
                 $page_name="listing";
 
-               return view('front.products.listing')->with(compact('categoryDetails','categoryProducts','url','page_name','options'));
+               return view('front.products.listing')->with(compact('categoryDetails','categoryProducts','url','page_name','options','brands'));
     
             }else{
                 abort(404);

@@ -12,6 +12,7 @@ use Session;
 class CouponController extends Controller
 {
     public function coupons(){
+        //select all items coupon
         Session::put('page','coupons');
         $coupons = Coupon::get()->toArray();
 
@@ -41,11 +42,12 @@ class CouponController extends Controller
         }else{
             $coupon = Coupon::find($id);
             $selCats = explode(',',$coupon['categories']);
-            $selUsers = explode(',',$coupon['users']);
+            $selUsers = explode(',',$coupon['users']); 
             $title = "Edit Coupon";
             $message = 'Coupon updated successfully!';
         }
         if($request->isMethod('post')){
+            //insert or update => condition id 
             $data = $request->all();
             $rules =[
                 'categories' => 'required',
@@ -70,6 +72,7 @@ class CouponController extends Controller
 
             if(isset($data['users'])){
                 $users = implode(',', $data['users']);
+               
             
             }else {
                 $users = "";

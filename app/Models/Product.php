@@ -32,7 +32,7 @@ class Product extends Model
   
     public function values()
     {
-        return $this->morphedByMany(OptionValues::class, 'productable');
+        return $this->morphedByMany(OptionValues::class, 'productable','productables');
     }
     public static function productFilters(){
         //product fliler
